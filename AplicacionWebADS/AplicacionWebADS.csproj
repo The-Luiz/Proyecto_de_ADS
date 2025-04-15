@@ -121,66 +121,77 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\UsuariosController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\BaseDatos.Context.cs">
+    <Compile Include="Models\BDIphone.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>BaseDatos.Context.tt</DependentUpon>
+      <DependentUpon>BDIphone.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\BaseDatos.cs">
+    <Compile Include="Models\BDIphone.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>BaseDatos.tt</DependentUpon>
+      <DependentUpon>BDIphone.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\BaseDatos.Designer.cs">
+    <Compile Include="Models\BDIphone.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>BaseDatos.edmx</DependentUpon>
+      <DependentUpon>BDIphone.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Bodega.cs">
-      <DependentUpon>BaseDatos.tt</DependentUpon>
+      <DependentUpon>BDIphone.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CarritoCompras.cs">
+      <DependentUpon>BDIphone.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Clientes.cs">
-      <DependentUpon>BaseDatos.tt</DependentUpon>
+      <DependentUpon>BDIphone.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DetallePedido.cs">
-      <DependentUpon>BaseDatos.tt</DependentUpon>
+      <DependentUpon>BDIphone.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Facturacion.cs">
-      <DependentUpon>BaseDatos.tt</DependentUpon>
+      <DependentUpon>BDIphone.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\HistorialCambios.cs">
-      <DependentUpon>BaseDatos.tt</DependentUpon>
+      <DependentUpon>BDIphone.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ImagenesProducto.cs">
+      <DependentUpon>BDIphone.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LoginUsuario_Result.cs">
+      <DependentUpon>BDIphone.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Pedidos.cs">
-      <DependentUpon>BaseDatos.tt</DependentUpon>
+      <DependentUpon>BDIphone.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Productos.cs">
-      <DependentUpon>BaseDatos.tt</DependentUpon>
+      <DependentUpon>BDIphone.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Proveedores.cs">
-      <DependentUpon>BaseDatos.tt</DependentUpon>
+      <DependentUpon>BDIphone.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Recibos.cs">
-      <DependentUpon>BaseDatos.tt</DependentUpon>
+      <DependentUpon>BDIphone.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ReporteProductosMasVendido_Result.cs">
-      <DependentUpon>BaseDatos.tt</DependentUpon>
+      <DependentUpon>BDIphone.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Usuarios.cs">
-      <DependentUpon>BaseDatos.tt</DependentUpon>
+      <DependentUpon>BDIphone.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Vista_Admin.cs">
-      <DependentUpon>BaseDatos.tt</DependentUpon>
+      <DependentUpon>BDIphone.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Vista_CarritoCompras.cs">
+      <DependentUpon>BDIphone.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Vista_Empleados.cs">
-      <DependentUpon>BaseDatos.tt</DependentUpon>
+      <DependentUpon>BDIphone.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Vista_Usuarios.cs">
-      <DependentUpon>BaseDatos.tt</DependentUpon>
+      <DependentUpon>BDIphone.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -204,15 +215,15 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Models\BaseDatos.Context.tt">
+    <Content Include="Models\BDIphone.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>BaseDatos.edmx</DependentUpon>
-      <LastGenOutput>BaseDatos.Context.cs</LastGenOutput>
+      <DependentUpon>BDIphone.edmx</DependentUpon>
+      <LastGenOutput>BDIphone.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\BaseDatos.tt">
+    <Content Include="Models\BDIphone.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>BaseDatos.edmx</DependentUpon>
-      <LastGenOutput>BaseDatos.cs</LastGenOutput>
+      <DependentUpon>BDIphone.edmx</DependentUpon>
+      <LastGenOutput>BDIphone.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -220,12 +231,12 @@
     <Content Include="Scripts\bootstrap.esm.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EntityDeploy Include="Models\BaseDatos.edmx">
+    <EntityDeploy Include="Models\BDIphone.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>BaseDatos.Designer.cs</LastGenOutput>
+      <LastGenOutput>BDIphone.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\BaseDatos.edmx.diagram">
-      <DependentUpon>BaseDatos.edmx</DependentUpon>
+    <Content Include="Models\BDIphone.edmx.diagram">
+      <DependentUpon>BDIphone.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
@@ -247,7 +258,6 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Usuarios\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
