@@ -124,74 +124,78 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\BDIphone.Context.cs">
+    <Compile Include="Models\BasedeDatos.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>BDIphone.Context.tt</DependentUpon>
+      <DependentUpon>BasedeDatos.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\BDIphone.cs">
+    <Compile Include="Models\BasedeDatos.cs" />
+    <Compile Include="Models\BasedeDatos.Designer.cs">
+      <DependentUpon>BasedeDatos.edmx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>BDIphone.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\BDIphone.Designer.cs">
+    <Compile Include="Models\BasedeDatos1.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>BDIphone.edmx</DependentUpon>
+      <DependentUpon>BasedeDatos.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Bodega.cs">
-      <DependentUpon>BDIphone.tt</DependentUpon>
+      <DependentUpon>BasedeDatos.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CarritoCompras.cs">
-      <DependentUpon>BDIphone.tt</DependentUpon>
+      <DependentUpon>BasedeDatos.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Clientes.cs">
-      <DependentUpon>BDIphone.tt</DependentUpon>
+      <DependentUpon>BasedeDatos.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DetallePedido.cs">
-      <DependentUpon>BDIphone.tt</DependentUpon>
+      <DependentUpon>BasedeDatos.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Facturacion.cs">
-      <DependentUpon>BDIphone.tt</DependentUpon>
+      <DependentUpon>BasedeDatos.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\HistorialCambios.cs">
-      <DependentUpon>BDIphone.tt</DependentUpon>
+      <DependentUpon>BasedeDatos.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ImagenesProducto.cs">
-      <DependentUpon>BDIphone.tt</DependentUpon>
+      <DependentUpon>BasedeDatos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ImagenUsuario.cs">
+      <DependentUpon>BasedeDatos.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\LoginUsuario_Result.cs">
-      <DependentUpon>BDIphone.tt</DependentUpon>
+      <DependentUpon>BasedeDatos.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Pedidos.cs">
-      <DependentUpon>BDIphone.tt</DependentUpon>
+      <DependentUpon>BasedeDatos.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Productos.cs">
-      <DependentUpon>BDIphone.tt</DependentUpon>
+      <DependentUpon>BasedeDatos.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Proveedores.cs">
-      <DependentUpon>BDIphone.tt</DependentUpon>
+      <DependentUpon>BasedeDatos.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Recibos.cs">
-      <DependentUpon>BDIphone.tt</DependentUpon>
+      <DependentUpon>BasedeDatos.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ReporteProductosMasVendido_Result.cs">
-      <DependentUpon>BDIphone.tt</DependentUpon>
+      <DependentUpon>BasedeDatos.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Usuarios.cs">
-      <DependentUpon>BDIphone.tt</DependentUpon>
+      <DependentUpon>BasedeDatos.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Vista_Admin.cs">
-      <DependentUpon>BDIphone.tt</DependentUpon>
+      <DependentUpon>BasedeDatos.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Vista_CarritoCompras.cs">
-      <DependentUpon>BDIphone.tt</DependentUpon>
+      <DependentUpon>BasedeDatos.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Vista_Empleados.cs">
-      <DependentUpon>BDIphone.tt</DependentUpon>
+      <DependentUpon>BasedeDatos.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Vista_Usuarios.cs">
-      <DependentUpon>BDIphone.tt</DependentUpon>
+      <DependentUpon>BasedeDatos.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -215,15 +219,15 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Models\BDIphone.Context.tt">
+    <Content Include="Models\BasedeDatos.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>BDIphone.edmx</DependentUpon>
-      <LastGenOutput>BDIphone.Context.cs</LastGenOutput>
+      <DependentUpon>BasedeDatos.edmx</DependentUpon>
+      <LastGenOutput>BasedeDatos.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\BDIphone.tt">
+    <Content Include="Models\BasedeDatos.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>BDIphone.edmx</DependentUpon>
-      <LastGenOutput>BDIphone.cs</LastGenOutput>
+      <DependentUpon>BasedeDatos.edmx</DependentUpon>
+      <LastGenOutput>BasedeDatos1.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -231,12 +235,12 @@
     <Content Include="Scripts\bootstrap.esm.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EntityDeploy Include="Models\BDIphone.edmx">
+    <EntityDeploy Include="Models\BasedeDatos.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>BDIphone.Designer.cs</LastGenOutput>
+      <LastGenOutput>BasedeDatos.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\BDIphone.edmx.diagram">
-      <DependentUpon>BDIphone.edmx</DependentUpon>
+    <Content Include="Models\BasedeDatos.edmx.diagram">
+      <DependentUpon>BasedeDatos.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />

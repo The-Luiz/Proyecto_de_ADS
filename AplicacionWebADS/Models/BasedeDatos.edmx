@@ -5,6 +5,26 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
       <Schema Namespace="MyIphonesvModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Bodega">
+          <Key>
+            <PropertyRef Name="TransaccionID" />
+          </Key>
+          <Property Name="TransaccionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductoID" Type="int" Nullable="false" />
+          <Property Name="TipoMovimiento" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Cantidad" Type="int" Nullable="false" />
+          <Property Name="Fecha" Type="datetime" />
+          <Property Name="ProveedorID" Type="int" />
+        </EntityType>
+        <EntityType Name="CarritoCompras">
+          <Key>
+            <PropertyRef Name="CarritoID" />
+          </Key>
+          <Property Name="CarritoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UsuarioID" Type="int" Nullable="false" />
+          <Property Name="ProductoID" Type="int" Nullable="false" />
+          <Property Name="Cantidad" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Clientes">
           <Key>
             <PropertyRef Name="ClienteID" />
@@ -26,6 +46,43 @@
           <Property Name="ProductoID" Type="int" Nullable="false" />
           <Property Name="Cantidad" Type="int" Nullable="false" />
           <Property Name="Subtotal" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Facturacion">
+          <Key>
+            <PropertyRef Name="FacturaID" />
+          </Key>
+          <Property Name="FacturaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PedidoID" Type="int" Nullable="false" />
+          <Property Name="Fecha" Type="datetime" />
+          <Property Name="MontoTotal" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="ClienteID" Type="int" Nullable="false" />
+          <Property Name="UsuarioID" Type="int" />
+        </EntityType>
+        <EntityType Name="HistorialCambios">
+          <Key>
+            <PropertyRef Name="CambioID" />
+          </Key>
+          <Property Name="CambioID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UsuarioID" Type="int" Nullable="false" />
+          <Property Name="TablaAfectada" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="FechaCambio" Type="datetime" />
+          <Property Name="DescripcionCambio" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="ImagenesProducto">
+          <Key>
+            <PropertyRef Name="ImagenID" />
+          </Key>
+          <Property Name="ImagenID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductoID" Type="int" Nullable="false" />
+          <Property Name="URLImagen" Type="nvarchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ImagenUsuario">
+          <Key>
+            <PropertyRef Name="ImagenID" />
+          </Key>
+          <Property Name="ImagenID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UsuarioID" Type="int" Nullable="false" />
+          <Property Name="URLImagen" Type="nvarchar" MaxLength="255" Nullable="false" />
         </EntityType>
         <EntityType Name="Pedidos">
           <Key>
@@ -57,6 +114,7 @@
           <Property Name="Correo" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="Telefono" Type="nvarchar" MaxLength="20" />
           <Property Name="ProductoOfrecido" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="UsuarioID" Type="int" />
         </EntityType>
         <EntityType Name="Recibos">
           <Key>
@@ -83,7 +141,130 @@
           <Property Name="Contraseña" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="Rol" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <Association Name="FK__Clientes__Usuari__3E52440B">
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'MyIphonesv.dbo.Vista_Admin' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="Vista_Admin">
+          <Key>
+            <PropertyRef Name="Producto_ID" />
+            <PropertyRef Name="Producto_Nombre" />
+            <PropertyRef Name="Producto_Precio" />
+            <PropertyRef Name="Producto_Stock" />
+            <PropertyRef Name="Cliente_ID" />
+            <PropertyRef Name="Cliente_Nombre" />
+            <PropertyRef Name="Cliente_Correo" />
+            <PropertyRef Name="Pedido_ID" />
+            <PropertyRef Name="Pedido_Total" />
+            <PropertyRef Name="Pedido_Estado" />
+          </Key>
+          <Property Name="Producto_ID" Type="int" Nullable="false" />
+          <Property Name="Producto_Nombre" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Producto_Descripcion" Type="varchar" MaxLength="300" />
+          <Property Name="Producto_Precio" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Producto_Stock" Type="int" Nullable="false" />
+          <Property Name="Cliente_ID" Type="int" Nullable="false" />
+          <Property Name="Cliente_Nombre" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Cliente_Correo" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Pedido_ID" Type="int" Nullable="false" />
+          <Property Name="Pedido_Fecha" Type="datetime" />
+          <Property Name="Pedido_Total" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Pedido_Estado" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'MyIphonesv.dbo.Vista_CarritoCompras' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="Vista_CarritoCompras">
+          <Key>
+            <PropertyRef Name="CarritoID" />
+            <PropertyRef Name="UsuarioNombre" />
+            <PropertyRef Name="ProductoNombre" />
+            <PropertyRef Name="Cantidad" />
+            <PropertyRef Name="Precio" />
+          </Key>
+          <Property Name="CarritoID" Type="int" Nullable="false" />
+          <Property Name="UsuarioNombre" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="ProductoNombre" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Cantidad" Type="int" Nullable="false" />
+          <Property Name="Precio" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Subtotal" Type="decimal" Precision="21" Scale="2" />
+          <Property Name="ImagenProducto" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'MyIphonesv.dbo.Vista_Empleados' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="Vista_Empleados">
+          <Key>
+            <PropertyRef Name="ClienteID" />
+            <PropertyRef Name="Nombre" />
+            <PropertyRef Name="Correo" />
+          </Key>
+          <Property Name="ClienteID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Correo" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Telefono" Type="nvarchar" MaxLength="20" />
+          <Property Name="Direccion" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'MyIphonesv.dbo.Vista_Usuarios' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="Vista_Usuarios">
+          <Key>
+            <PropertyRef Name="Nombre" />
+            <PropertyRef Name="Precio" />
+            <PropertyRef Name="Stock" />
+            <PropertyRef Name="Categoria" />
+          </Key>
+          <Property Name="Nombre" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="300" />
+          <Property Name="Precio" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Stock" Type="int" Nullable="false" />
+          <Property Name="Categoria" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Bodega__Producto__5DCAEF64">
+          <End Role="Productos" Type="Self.Productos" Multiplicity="1" />
+          <End Role="Bodega" Type="Self.Bodega" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Productos">
+              <PropertyRef Name="ProductoID" />
+            </Principal>
+            <Dependent Role="Bodega">
+              <PropertyRef Name="ProductoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Bodega__Proveedo__5EBF139D">
+          <End Role="Proveedores" Type="Self.Proveedores" Multiplicity="0..1" />
+          <End Role="Bodega" Type="Self.Bodega" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proveedores">
+              <PropertyRef Name="ProveedorID" />
+            </Principal>
+            <Dependent Role="Bodega">
+              <PropertyRef Name="ProveedorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CarritoCo__Produ__66603565">
+          <End Role="Productos" Type="Self.Productos" Multiplicity="1" />
+          <End Role="CarritoCompras" Type="Self.CarritoCompras" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Productos">
+              <PropertyRef Name="ProductoID" />
+            </Principal>
+            <Dependent Role="CarritoCompras">
+              <PropertyRef Name="ProductoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CarritoCo__Usuar__656C112C">
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+          <End Role="CarritoCompras" Type="Self.CarritoCompras" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="UsuarioID" />
+            </Principal>
+            <Dependent Role="CarritoCompras">
+              <PropertyRef Name="UsuarioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Clientes__Usuari__412EB0B6">
           <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="0..1" />
           <End Role="Clientes" Type="Self.Clientes" Multiplicity="*" />
           <ReferentialConstraint>
@@ -95,7 +276,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__DetallePe__Pedid__47DBAE45">
+        <Association Name="FK__DetallePe__Pedid__4AB81AF0">
           <End Role="Pedidos" Type="Self.Pedidos" Multiplicity="1" />
           <End Role="DetallePedido" Type="Self.DetallePedido" Multiplicity="*" />
           <ReferentialConstraint>
@@ -107,7 +288,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__DetallePe__Produ__48CFD27E">
+        <Association Name="FK__DetallePe__Produ__4BAC3F29">
           <End Role="Productos" Type="Self.Productos" Multiplicity="1" />
           <End Role="DetallePedido" Type="Self.DetallePedido" Multiplicity="*" />
           <ReferentialConstraint>
@@ -119,7 +300,79 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Pedidos__Cliente__44FF419A">
+        <Association Name="FK__Facturaci__Clien__5812160E">
+          <End Role="Clientes" Type="Self.Clientes" Multiplicity="1" />
+          <End Role="Facturacion" Type="Self.Facturacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clientes">
+              <PropertyRef Name="ClienteID" />
+            </Principal>
+            <Dependent Role="Facturacion">
+              <PropertyRef Name="ClienteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Facturaci__Pedid__571DF1D5">
+          <End Role="Pedidos" Type="Self.Pedidos" Multiplicity="1" />
+          <End Role="Facturacion" Type="Self.Facturacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pedidos">
+              <PropertyRef Name="PedidoID" />
+            </Principal>
+            <Dependent Role="Facturacion">
+              <PropertyRef Name="PedidoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Facturaci__Usuar__59063A47">
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="0..1" />
+          <End Role="Facturacion" Type="Self.Facturacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="UsuarioID" />
+            </Principal>
+            <Dependent Role="Facturacion">
+              <PropertyRef Name="UsuarioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Historial__Usuar__628FA481">
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+          <End Role="HistorialCambios" Type="Self.HistorialCambios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="UsuarioID" />
+            </Principal>
+            <Dependent Role="HistorialCambios">
+              <PropertyRef Name="UsuarioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ImagenesP__Produ__693CA210">
+          <End Role="Productos" Type="Self.Productos" Multiplicity="1" />
+          <End Role="ImagenesProducto" Type="Self.ImagenesProducto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Productos">
+              <PropertyRef Name="ProductoID" />
+            </Principal>
+            <Dependent Role="ImagenesProducto">
+              <PropertyRef Name="ProductoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ImagenUsu__Usuar__3B75D760">
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+          <End Role="ImagenUsuario" Type="Self.ImagenUsuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="UsuarioID" />
+            </Principal>
+            <Dependent Role="ImagenUsuario">
+              <PropertyRef Name="UsuarioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Pedidos__Cliente__47DBAE45">
           <End Role="Clientes" Type="Self.Clientes" Multiplicity="1" />
           <End Role="Pedidos" Type="Self.Pedidos" Multiplicity="*" />
           <ReferentialConstraint>
@@ -131,7 +384,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Recibos__Cliente__4BAC3F29">
+        <Association Name="FK__Proveedor__Usuar__534D60F1">
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="0..1" />
+          <End Role="Proveedores" Type="Self.Proveedores" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="UsuarioID" />
+            </Principal>
+            <Dependent Role="Proveedores">
+              <PropertyRef Name="UsuarioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Recibos__Cliente__4E88ABD4">
           <End Role="Clientes" Type="Self.Clientes" Multiplicity="1" />
           <End Role="Recibos" Type="Self.Recibos" Multiplicity="*" />
           <ReferentialConstraint>
@@ -143,7 +408,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Recibos__PedidoI__4CA06362">
+        <Association Name="FK__Recibos__PedidoI__4F7CD00D">
           <End Role="Pedidos" Type="Self.Pedidos" Multiplicity="1" />
           <End Role="Recibos" Type="Self.Recibos" Multiplicity="*" />
           <ReferentialConstraint>
@@ -155,35 +420,145 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="CrearUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Nombre" Type="varchar" Mode="In" />
+          <Parameter Name="Correo" Type="varchar" Mode="In" />
+          <Parameter Name="Contraseña" Type="nvarchar" Mode="In" />
+          <Parameter Name="Rol" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="GenerarRecibo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ClienteID" Type="int" Mode="In" />
+          <Parameter Name="PedidoID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="LoginUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Correo" Type="varchar" Mode="In" />
+          <Parameter Name="Contraseña" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="ReporteProductosMasVendido" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="MyIphonesvModelStoreContainer">
+          <EntitySet Name="Bodega" EntityType="Self.Bodega" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CarritoCompras" EntityType="Self.CarritoCompras" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Clientes" EntityType="Self.Clientes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DetallePedido" EntityType="Self.DetallePedido" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Facturacion" EntityType="Self.Facturacion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HistorialCambios" EntityType="Self.HistorialCambios" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ImagenesProducto" EntityType="Self.ImagenesProducto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ImagenUsuario" EntityType="Self.ImagenUsuario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Pedidos" EntityType="Self.Pedidos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Productos" EntityType="Self.Productos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Proveedores" EntityType="Self.Proveedores" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Recibos" EntityType="Self.Recibos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Clientes__Usuari__3E52440B" Association="Self.FK__Clientes__Usuari__3E52440B">
+          <EntitySet Name="Vista_Admin" EntityType="Self.Vista_Admin" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Vista_Admin].[Producto_ID] AS [Producto_ID], 
+    [Vista_Admin].[Producto_Nombre] AS [Producto_Nombre], 
+    [Vista_Admin].[Producto_Descripcion] AS [Producto_Descripcion], 
+    [Vista_Admin].[Producto_Precio] AS [Producto_Precio], 
+    [Vista_Admin].[Producto_Stock] AS [Producto_Stock], 
+    [Vista_Admin].[Cliente_ID] AS [Cliente_ID], 
+    [Vista_Admin].[Cliente_Nombre] AS [Cliente_Nombre], 
+    [Vista_Admin].[Cliente_Correo] AS [Cliente_Correo], 
+    [Vista_Admin].[Pedido_ID] AS [Pedido_ID], 
+    [Vista_Admin].[Pedido_Fecha] AS [Pedido_Fecha], 
+    [Vista_Admin].[Pedido_Total] AS [Pedido_Total], 
+    [Vista_Admin].[Pedido_Estado] AS [Pedido_Estado]
+    FROM [dbo].[Vista_Admin] AS [Vista_Admin]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Vista_CarritoCompras" EntityType="Self.Vista_CarritoCompras" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Vista_CarritoCompras].[CarritoID] AS [CarritoID], 
+    [Vista_CarritoCompras].[UsuarioNombre] AS [UsuarioNombre], 
+    [Vista_CarritoCompras].[ProductoNombre] AS [ProductoNombre], 
+    [Vista_CarritoCompras].[Cantidad] AS [Cantidad], 
+    [Vista_CarritoCompras].[Precio] AS [Precio], 
+    [Vista_CarritoCompras].[Subtotal] AS [Subtotal], 
+    [Vista_CarritoCompras].[ImagenProducto] AS [ImagenProducto]
+    FROM [dbo].[Vista_CarritoCompras] AS [Vista_CarritoCompras]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Vista_Empleados" EntityType="Self.Vista_Empleados" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Vista_Empleados].[ClienteID] AS [ClienteID], 
+    [Vista_Empleados].[Nombre] AS [Nombre], 
+    [Vista_Empleados].[Correo] AS [Correo], 
+    [Vista_Empleados].[Telefono] AS [Telefono], 
+    [Vista_Empleados].[Direccion] AS [Direccion]
+    FROM [dbo].[Vista_Empleados] AS [Vista_Empleados]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Vista_Usuarios" EntityType="Self.Vista_Usuarios" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Vista_Usuarios].[Nombre] AS [Nombre], 
+    [Vista_Usuarios].[Descripcion] AS [Descripcion], 
+    [Vista_Usuarios].[Precio] AS [Precio], 
+    [Vista_Usuarios].[Stock] AS [Stock], 
+    [Vista_Usuarios].[Categoria] AS [Categoria]
+    FROM [dbo].[Vista_Usuarios] AS [Vista_Usuarios]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__Bodega__Producto__5DCAEF64" Association="Self.FK__Bodega__Producto__5DCAEF64">
+            <End Role="Productos" EntitySet="Productos" />
+            <End Role="Bodega" EntitySet="Bodega" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Bodega__Proveedo__5EBF139D" Association="Self.FK__Bodega__Proveedo__5EBF139D">
+            <End Role="Proveedores" EntitySet="Proveedores" />
+            <End Role="Bodega" EntitySet="Bodega" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CarritoCo__Produ__66603565" Association="Self.FK__CarritoCo__Produ__66603565">
+            <End Role="Productos" EntitySet="Productos" />
+            <End Role="CarritoCompras" EntitySet="CarritoCompras" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CarritoCo__Usuar__656C112C" Association="Self.FK__CarritoCo__Usuar__656C112C">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="CarritoCompras" EntitySet="CarritoCompras" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Clientes__Usuari__412EB0B6" Association="Self.FK__Clientes__Usuari__412EB0B6">
             <End Role="Usuarios" EntitySet="Usuarios" />
             <End Role="Clientes" EntitySet="Clientes" />
           </AssociationSet>
-          <AssociationSet Name="FK__DetallePe__Pedid__47DBAE45" Association="Self.FK__DetallePe__Pedid__47DBAE45">
+          <AssociationSet Name="FK__DetallePe__Pedid__4AB81AF0" Association="Self.FK__DetallePe__Pedid__4AB81AF0">
             <End Role="Pedidos" EntitySet="Pedidos" />
             <End Role="DetallePedido" EntitySet="DetallePedido" />
           </AssociationSet>
-          <AssociationSet Name="FK__DetallePe__Produ__48CFD27E" Association="Self.FK__DetallePe__Produ__48CFD27E">
+          <AssociationSet Name="FK__DetallePe__Produ__4BAC3F29" Association="Self.FK__DetallePe__Produ__4BAC3F29">
             <End Role="Productos" EntitySet="Productos" />
             <End Role="DetallePedido" EntitySet="DetallePedido" />
           </AssociationSet>
-          <AssociationSet Name="FK__Pedidos__Cliente__44FF419A" Association="Self.FK__Pedidos__Cliente__44FF419A">
+          <AssociationSet Name="FK__Facturaci__Clien__5812160E" Association="Self.FK__Facturaci__Clien__5812160E">
+            <End Role="Clientes" EntitySet="Clientes" />
+            <End Role="Facturacion" EntitySet="Facturacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Facturaci__Pedid__571DF1D5" Association="Self.FK__Facturaci__Pedid__571DF1D5">
+            <End Role="Pedidos" EntitySet="Pedidos" />
+            <End Role="Facturacion" EntitySet="Facturacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Facturaci__Usuar__59063A47" Association="Self.FK__Facturaci__Usuar__59063A47">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="Facturacion" EntitySet="Facturacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Historial__Usuar__628FA481" Association="Self.FK__Historial__Usuar__628FA481">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="HistorialCambios" EntitySet="HistorialCambios" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ImagenesP__Produ__693CA210" Association="Self.FK__ImagenesP__Produ__693CA210">
+            <End Role="Productos" EntitySet="Productos" />
+            <End Role="ImagenesProducto" EntitySet="ImagenesProducto" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ImagenUsu__Usuar__3B75D760" Association="Self.FK__ImagenUsu__Usuar__3B75D760">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="ImagenUsuario" EntitySet="ImagenUsuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Pedidos__Cliente__47DBAE45" Association="Self.FK__Pedidos__Cliente__47DBAE45">
             <End Role="Clientes" EntitySet="Clientes" />
             <End Role="Pedidos" EntitySet="Pedidos" />
           </AssociationSet>
-          <AssociationSet Name="FK__Recibos__Cliente__4BAC3F29" Association="Self.FK__Recibos__Cliente__4BAC3F29">
+          <AssociationSet Name="FK__Proveedor__Usuar__534D60F1" Association="Self.FK__Proveedor__Usuar__534D60F1">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="Proveedores" EntitySet="Proveedores" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Recibos__Cliente__4E88ABD4" Association="Self.FK__Recibos__Cliente__4E88ABD4">
             <End Role="Clientes" EntitySet="Clientes" />
             <End Role="Recibos" EntitySet="Recibos" />
           </AssociationSet>
-          <AssociationSet Name="FK__Recibos__PedidoI__4CA06362" Association="Self.FK__Recibos__PedidoI__4CA06362">
+          <AssociationSet Name="FK__Recibos__PedidoI__4F7CD00D" Association="Self.FK__Recibos__PedidoI__4F7CD00D">
             <End Role="Pedidos" EntitySet="Pedidos" />
             <End Role="Recibos" EntitySet="Recibos" />
           </AssociationSet>
@@ -193,6 +568,30 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="MyIphonesvModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Bodega">
+          <Key>
+            <PropertyRef Name="TransaccionID" />
+          </Key>
+          <Property Name="TransaccionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductoID" Type="Int32" Nullable="false" />
+          <Property Name="TipoMovimiento" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Cantidad" Type="Int32" Nullable="false" />
+          <Property Name="Fecha" Type="DateTime" Precision="3" />
+          <Property Name="ProveedorID" Type="Int32" />
+          <NavigationProperty Name="Productos" Relationship="Self.FK__Bodega__Producto__5DCAEF64" FromRole="Bodega" ToRole="Productos" />
+          <NavigationProperty Name="Proveedores" Relationship="Self.FK__Bodega__Proveedo__5EBF139D" FromRole="Bodega" ToRole="Proveedores" />
+        </EntityType>
+        <EntityType Name="CarritoCompras">
+          <Key>
+            <PropertyRef Name="CarritoID" />
+          </Key>
+          <Property Name="CarritoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UsuarioID" Type="Int32" Nullable="false" />
+          <Property Name="ProductoID" Type="Int32" Nullable="false" />
+          <Property Name="Cantidad" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Productos" Relationship="Self.FK__CarritoCo__Produ__66603565" FromRole="CarritoCompras" ToRole="Productos" />
+          <NavigationProperty Name="Usuarios" Relationship="Self.FK__CarritoCo__Usuar__656C112C" FromRole="CarritoCompras" ToRole="Usuarios" />
+        </EntityType>
         <EntityType Name="Clientes">
           <Key>
             <PropertyRef Name="ClienteID" />
@@ -204,9 +603,10 @@
           <Property Name="Direccion" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="UsuarioID" Type="Int32" />
           <Property Name="Rol" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Usuarios" Relationship="Self.FK__Clientes__Usuari__3E52440B" FromRole="Clientes" ToRole="Usuarios" />
-          <NavigationProperty Name="Pedidos" Relationship="Self.FK__Pedidos__Cliente__44FF419A" FromRole="Clientes" ToRole="Pedidos" />
-          <NavigationProperty Name="Recibos" Relationship="Self.FK__Recibos__Cliente__4BAC3F29" FromRole="Clientes" ToRole="Recibos" />
+          <NavigationProperty Name="Usuarios" Relationship="Self.FK__Clientes__Usuari__412EB0B6" FromRole="Clientes" ToRole="Usuarios" />
+          <NavigationProperty Name="Facturacion" Relationship="Self.FK__Facturaci__Clien__5812160E" FromRole="Clientes" ToRole="Facturacion" />
+          <NavigationProperty Name="Pedidos" Relationship="Self.FK__Pedidos__Cliente__47DBAE45" FromRole="Clientes" ToRole="Pedidos" />
+          <NavigationProperty Name="Recibos" Relationship="Self.FK__Recibos__Cliente__4E88ABD4" FromRole="Clientes" ToRole="Recibos" />
         </EntityType>
         <EntityType Name="DetallePedido">
           <Key>
@@ -217,8 +617,51 @@
           <Property Name="ProductoID" Type="Int32" Nullable="false" />
           <Property Name="Cantidad" Type="Int32" Nullable="false" />
           <Property Name="Subtotal" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
-          <NavigationProperty Name="Pedidos" Relationship="Self.FK__DetallePe__Pedid__47DBAE45" FromRole="DetallePedido" ToRole="Pedidos" />
-          <NavigationProperty Name="Productos" Relationship="Self.FK__DetallePe__Produ__48CFD27E" FromRole="DetallePedido" ToRole="Productos" />
+          <NavigationProperty Name="Pedidos" Relationship="Self.FK__DetallePe__Pedid__4AB81AF0" FromRole="DetallePedido" ToRole="Pedidos" />
+          <NavigationProperty Name="Productos" Relationship="Self.FK__DetallePe__Produ__4BAC3F29" FromRole="DetallePedido" ToRole="Productos" />
+        </EntityType>
+        <EntityType Name="Facturacion">
+          <Key>
+            <PropertyRef Name="FacturaID" />
+          </Key>
+          <Property Name="FacturaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PedidoID" Type="Int32" Nullable="false" />
+          <Property Name="Fecha" Type="DateTime" Precision="3" />
+          <Property Name="MontoTotal" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="ClienteID" Type="Int32" Nullable="false" />
+          <Property Name="UsuarioID" Type="Int32" />
+          <NavigationProperty Name="Clientes" Relationship="Self.FK__Facturaci__Clien__5812160E" FromRole="Facturacion" ToRole="Clientes" />
+          <NavigationProperty Name="Pedidos" Relationship="Self.FK__Facturaci__Pedid__571DF1D5" FromRole="Facturacion" ToRole="Pedidos" />
+          <NavigationProperty Name="Usuarios" Relationship="Self.FK__Facturaci__Usuar__59063A47" FromRole="Facturacion" ToRole="Usuarios" />
+        </EntityType>
+        <EntityType Name="HistorialCambios">
+          <Key>
+            <PropertyRef Name="CambioID" />
+          </Key>
+          <Property Name="CambioID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UsuarioID" Type="Int32" Nullable="false" />
+          <Property Name="TablaAfectada" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FechaCambio" Type="DateTime" Precision="3" />
+          <Property Name="DescripcionCambio" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Usuarios" Relationship="Self.FK__Historial__Usuar__628FA481" FromRole="HistorialCambios" ToRole="Usuarios" />
+        </EntityType>
+        <EntityType Name="ImagenesProducto">
+          <Key>
+            <PropertyRef Name="ImagenID" />
+          </Key>
+          <Property Name="ImagenID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductoID" Type="Int32" Nullable="false" />
+          <Property Name="URLImagen" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Productos" Relationship="Self.FK__ImagenesP__Produ__693CA210" FromRole="ImagenesProducto" ToRole="Productos" />
+        </EntityType>
+        <EntityType Name="ImagenUsuario">
+          <Key>
+            <PropertyRef Name="ImagenID" />
+          </Key>
+          <Property Name="ImagenID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UsuarioID" Type="Int32" Nullable="false" />
+          <Property Name="URLImagen" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Usuarios" Relationship="Self.FK__ImagenUsu__Usuar__3B75D760" FromRole="ImagenUsuario" ToRole="Usuarios" />
         </EntityType>
         <EntityType Name="Pedidos">
           <Key>
@@ -229,9 +672,10 @@
           <Property Name="FechaPedido" Type="DateTime" Precision="3" />
           <Property Name="Total" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
           <Property Name="Estado" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Clientes" Relationship="Self.FK__Pedidos__Cliente__44FF419A" FromRole="Pedidos" ToRole="Clientes" />
-          <NavigationProperty Name="DetallePedido" Relationship="Self.FK__DetallePe__Pedid__47DBAE45" FromRole="Pedidos" ToRole="DetallePedido" />
-          <NavigationProperty Name="Recibos" Relationship="Self.FK__Recibos__PedidoI__4CA06362" FromRole="Pedidos" ToRole="Recibos" />
+          <NavigationProperty Name="Clientes" Relationship="Self.FK__Pedidos__Cliente__47DBAE45" FromRole="Pedidos" ToRole="Clientes" />
+          <NavigationProperty Name="DetallePedido" Relationship="Self.FK__DetallePe__Pedid__4AB81AF0" FromRole="Pedidos" ToRole="DetallePedido" />
+          <NavigationProperty Name="Facturacion" Relationship="Self.FK__Facturaci__Pedid__571DF1D5" FromRole="Pedidos" ToRole="Facturacion" />
+          <NavigationProperty Name="Recibos" Relationship="Self.FK__Recibos__PedidoI__4F7CD00D" FromRole="Pedidos" ToRole="Recibos" />
         </EntityType>
         <EntityType Name="Productos">
           <Key>
@@ -243,7 +687,10 @@
           <Property Name="Precio" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
           <Property Name="Stock" Type="Int32" Nullable="false" />
           <Property Name="Categoria" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="DetallePedido" Relationship="Self.FK__DetallePe__Produ__48CFD27E" FromRole="Productos" ToRole="DetallePedido" />
+          <NavigationProperty Name="Bodega" Relationship="Self.FK__Bodega__Producto__5DCAEF64" FromRole="Productos" ToRole="Bodega" />
+          <NavigationProperty Name="CarritoCompras" Relationship="Self.FK__CarritoCo__Produ__66603565" FromRole="Productos" ToRole="CarritoCompras" />
+          <NavigationProperty Name="DetallePedido" Relationship="Self.FK__DetallePe__Produ__4BAC3F29" FromRole="Productos" ToRole="DetallePedido" />
+          <NavigationProperty Name="ImagenesProducto" Relationship="Self.FK__ImagenesP__Produ__693CA210" FromRole="Productos" ToRole="ImagenesProducto" />
         </EntityType>
         <EntityType Name="Proveedores">
           <Key>
@@ -254,6 +701,9 @@
           <Property Name="Correo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Telefono" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="ProductoOfrecido" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UsuarioID" Type="Int32" />
+          <NavigationProperty Name="Bodega" Relationship="Self.FK__Bodega__Proveedo__5EBF139D" FromRole="Proveedores" ToRole="Bodega" />
+          <NavigationProperty Name="Usuarios" Relationship="Self.FK__Proveedor__Usuar__534D60F1" FromRole="Proveedores" ToRole="Usuarios" />
         </EntityType>
         <EntityType Name="Recibos">
           <Key>
@@ -269,8 +719,8 @@
           <Property Name="TotalPedido" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
           <Property Name="EstadoPedido" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="DetallesPedido" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Clientes" Relationship="Self.FK__Recibos__Cliente__4BAC3F29" FromRole="Recibos" ToRole="Clientes" />
-          <NavigationProperty Name="Pedidos" Relationship="Self.FK__Recibos__PedidoI__4CA06362" FromRole="Recibos" ToRole="Pedidos" />
+          <NavigationProperty Name="Clientes" Relationship="Self.FK__Recibos__Cliente__4E88ABD4" FromRole="Recibos" ToRole="Clientes" />
+          <NavigationProperty Name="Pedidos" Relationship="Self.FK__Recibos__PedidoI__4F7CD00D" FromRole="Recibos" ToRole="Pedidos" />
         </EntityType>
         <EntityType Name="Usuarios">
           <Key>
@@ -281,9 +731,129 @@
           <Property Name="Correo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Contraseña" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Rol" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Clientes" Relationship="Self.FK__Clientes__Usuari__3E52440B" FromRole="Usuarios" ToRole="Clientes" />
+          <NavigationProperty Name="CarritoCompras" Relationship="Self.FK__CarritoCo__Usuar__656C112C" FromRole="Usuarios" ToRole="CarritoCompras" />
+          <NavigationProperty Name="Clientes" Relationship="Self.FK__Clientes__Usuari__412EB0B6" FromRole="Usuarios" ToRole="Clientes" />
+          <NavigationProperty Name="Facturacion" Relationship="Self.FK__Facturaci__Usuar__59063A47" FromRole="Usuarios" ToRole="Facturacion" />
+          <NavigationProperty Name="HistorialCambios" Relationship="Self.FK__Historial__Usuar__628FA481" FromRole="Usuarios" ToRole="HistorialCambios" />
+          <NavigationProperty Name="ImagenUsuario" Relationship="Self.FK__ImagenUsu__Usuar__3B75D760" FromRole="Usuarios" ToRole="ImagenUsuario" />
+          <NavigationProperty Name="Proveedores" Relationship="Self.FK__Proveedor__Usuar__534D60F1" FromRole="Usuarios" ToRole="Proveedores" />
         </EntityType>
-        <Association Name="FK__Clientes__Usuari__3E52440B">
+        <EntityType Name="Vista_Admin">
+          <Key>
+            <PropertyRef Name="Producto_ID" />
+            <PropertyRef Name="Producto_Nombre" />
+            <PropertyRef Name="Producto_Precio" />
+            <PropertyRef Name="Producto_Stock" />
+            <PropertyRef Name="Cliente_ID" />
+            <PropertyRef Name="Cliente_Nombre" />
+            <PropertyRef Name="Cliente_Correo" />
+            <PropertyRef Name="Pedido_ID" />
+            <PropertyRef Name="Pedido_Total" />
+            <PropertyRef Name="Pedido_Estado" />
+          </Key>
+          <Property Name="Producto_ID" Type="Int32" Nullable="false" />
+          <Property Name="Producto_Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Producto_Descripcion" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="Producto_Precio" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Producto_Stock" Type="Int32" Nullable="false" />
+          <Property Name="Cliente_ID" Type="Int32" Nullable="false" />
+          <Property Name="Cliente_Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Cliente_Correo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Pedido_ID" Type="Int32" Nullable="false" />
+          <Property Name="Pedido_Fecha" Type="DateTime" Precision="3" />
+          <Property Name="Pedido_Total" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Pedido_Estado" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Vista_CarritoCompras">
+          <Key>
+            <PropertyRef Name="CarritoID" />
+            <PropertyRef Name="UsuarioNombre" />
+            <PropertyRef Name="ProductoNombre" />
+            <PropertyRef Name="Cantidad" />
+            <PropertyRef Name="Precio" />
+          </Key>
+          <Property Name="CarritoID" Type="Int32" Nullable="false" />
+          <Property Name="UsuarioNombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ProductoNombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Cantidad" Type="Int32" Nullable="false" />
+          <Property Name="Precio" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Subtotal" Type="Decimal" Precision="21" Scale="2" />
+          <Property Name="ImagenProducto" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Vista_Empleados">
+          <Key>
+            <PropertyRef Name="ClienteID" />
+            <PropertyRef Name="Nombre" />
+            <PropertyRef Name="Correo" />
+          </Key>
+          <Property Name="ClienteID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Correo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Telefono" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Direccion" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Vista_Usuarios">
+          <Key>
+            <PropertyRef Name="Nombre" />
+            <PropertyRef Name="Precio" />
+            <PropertyRef Name="Stock" />
+            <PropertyRef Name="Categoria" />
+          </Key>
+          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="Precio" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Stock" Type="Int32" Nullable="false" />
+          <Property Name="Categoria" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Bodega__Producto__5DCAEF64">
+          <End Role="Productos" Type="Self.Productos" Multiplicity="1" />
+          <End Role="Bodega" Type="Self.Bodega" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Productos">
+              <PropertyRef Name="ProductoID" />
+            </Principal>
+            <Dependent Role="Bodega">
+              <PropertyRef Name="ProductoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Bodega__Proveedo__5EBF139D">
+          <End Role="Proveedores" Type="Self.Proveedores" Multiplicity="0..1" />
+          <End Role="Bodega" Type="Self.Bodega" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proveedores">
+              <PropertyRef Name="ProveedorID" />
+            </Principal>
+            <Dependent Role="Bodega">
+              <PropertyRef Name="ProveedorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CarritoCo__Produ__66603565">
+          <End Role="Productos" Type="Self.Productos" Multiplicity="1" />
+          <End Role="CarritoCompras" Type="Self.CarritoCompras" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Productos">
+              <PropertyRef Name="ProductoID" />
+            </Principal>
+            <Dependent Role="CarritoCompras">
+              <PropertyRef Name="ProductoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CarritoCo__Usuar__656C112C">
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+          <End Role="CarritoCompras" Type="Self.CarritoCompras" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="UsuarioID" />
+            </Principal>
+            <Dependent Role="CarritoCompras">
+              <PropertyRef Name="UsuarioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Clientes__Usuari__412EB0B6">
           <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="0..1" />
           <End Role="Clientes" Type="Self.Clientes" Multiplicity="*" />
           <ReferentialConstraint>
@@ -295,7 +865,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Pedidos__Cliente__44FF419A">
+        <Association Name="FK__Facturaci__Clien__5812160E">
+          <End Role="Clientes" Type="Self.Clientes" Multiplicity="1" />
+          <End Role="Facturacion" Type="Self.Facturacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clientes">
+              <PropertyRef Name="ClienteID" />
+            </Principal>
+            <Dependent Role="Facturacion">
+              <PropertyRef Name="ClienteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Pedidos__Cliente__47DBAE45">
           <End Role="Clientes" Type="Self.Clientes" Multiplicity="1" />
           <End Role="Pedidos" Type="Self.Pedidos" Multiplicity="*" />
           <ReferentialConstraint>
@@ -307,7 +889,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Recibos__Cliente__4BAC3F29">
+        <Association Name="FK__Recibos__Cliente__4E88ABD4">
           <End Role="Clientes" Type="Self.Clientes" Multiplicity="1" />
           <End Role="Recibos" Type="Self.Recibos" Multiplicity="*" />
           <ReferentialConstraint>
@@ -319,7 +901,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__DetallePe__Pedid__47DBAE45">
+        <Association Name="FK__DetallePe__Pedid__4AB81AF0">
           <End Role="Pedidos" Type="Self.Pedidos" Multiplicity="1" />
           <End Role="DetallePedido" Type="Self.DetallePedido" Multiplicity="*" />
           <ReferentialConstraint>
@@ -331,7 +913,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__DetallePe__Produ__48CFD27E">
+        <Association Name="FK__DetallePe__Produ__4BAC3F29">
           <End Role="Productos" Type="Self.Productos" Multiplicity="1" />
           <End Role="DetallePedido" Type="Self.DetallePedido" Multiplicity="*" />
           <ReferentialConstraint>
@@ -343,7 +925,67 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Recibos__PedidoI__4CA06362">
+        <Association Name="FK__Facturaci__Pedid__571DF1D5">
+          <End Role="Pedidos" Type="Self.Pedidos" Multiplicity="1" />
+          <End Role="Facturacion" Type="Self.Facturacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pedidos">
+              <PropertyRef Name="PedidoID" />
+            </Principal>
+            <Dependent Role="Facturacion">
+              <PropertyRef Name="PedidoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Facturaci__Usuar__59063A47">
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="0..1" />
+          <End Role="Facturacion" Type="Self.Facturacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="UsuarioID" />
+            </Principal>
+            <Dependent Role="Facturacion">
+              <PropertyRef Name="UsuarioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Historial__Usuar__628FA481">
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+          <End Role="HistorialCambios" Type="Self.HistorialCambios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="UsuarioID" />
+            </Principal>
+            <Dependent Role="HistorialCambios">
+              <PropertyRef Name="UsuarioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ImagenesP__Produ__693CA210">
+          <End Role="Productos" Type="Self.Productos" Multiplicity="1" />
+          <End Role="ImagenesProducto" Type="Self.ImagenesProducto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Productos">
+              <PropertyRef Name="ProductoID" />
+            </Principal>
+            <Dependent Role="ImagenesProducto">
+              <PropertyRef Name="ProductoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ImagenUsu__Usuar__3B75D760">
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+          <End Role="ImagenUsuario" Type="Self.ImagenUsuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="UsuarioID" />
+            </Principal>
+            <Dependent Role="ImagenUsuario">
+              <PropertyRef Name="UsuarioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Recibos__PedidoI__4F7CD00D">
           <End Role="Pedidos" Type="Self.Pedidos" Multiplicity="1" />
           <End Role="Recibos" Type="Self.Recibos" Multiplicity="*" />
           <ReferentialConstraint>
@@ -355,45 +997,157 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__Proveedor__Usuar__534D60F1">
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="0..1" />
+          <End Role="Proveedores" Type="Self.Proveedores" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="UsuarioID" />
+            </Principal>
+            <Dependent Role="Proveedores">
+              <PropertyRef Name="UsuarioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="MyIphonesvEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Bodega" EntityType="Self.Bodega" />
+          <EntitySet Name="CarritoCompras" EntityType="Self.CarritoCompras" />
           <EntitySet Name="Clientes" EntityType="Self.Clientes" />
           <EntitySet Name="DetallePedido" EntityType="Self.DetallePedido" />
+          <EntitySet Name="Facturacion" EntityType="Self.Facturacion" />
+          <EntitySet Name="HistorialCambios" EntityType="Self.HistorialCambios" />
+          <EntitySet Name="ImagenesProducto" EntityType="Self.ImagenesProducto" />
+          <EntitySet Name="ImagenUsuario" EntityType="Self.ImagenUsuario" />
           <EntitySet Name="Pedidos" EntityType="Self.Pedidos" />
           <EntitySet Name="Productos" EntityType="Self.Productos" />
           <EntitySet Name="Proveedores" EntityType="Self.Proveedores" />
           <EntitySet Name="Recibos" EntityType="Self.Recibos" />
           <EntitySet Name="Usuarios" EntityType="Self.Usuarios" />
-          <AssociationSet Name="FK__Clientes__Usuari__3E52440B" Association="Self.FK__Clientes__Usuari__3E52440B">
+          <EntitySet Name="Vista_Admin" EntityType="Self.Vista_Admin" />
+          <EntitySet Name="Vista_CarritoCompras" EntityType="Self.Vista_CarritoCompras" />
+          <EntitySet Name="Vista_Empleados" EntityType="Self.Vista_Empleados" />
+          <EntitySet Name="Vista_Usuarios" EntityType="Self.Vista_Usuarios" />
+          <AssociationSet Name="FK__Bodega__Producto__5DCAEF64" Association="Self.FK__Bodega__Producto__5DCAEF64">
+            <End Role="Productos" EntitySet="Productos" />
+            <End Role="Bodega" EntitySet="Bodega" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Bodega__Proveedo__5EBF139D" Association="Self.FK__Bodega__Proveedo__5EBF139D">
+            <End Role="Proveedores" EntitySet="Proveedores" />
+            <End Role="Bodega" EntitySet="Bodega" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CarritoCo__Produ__66603565" Association="Self.FK__CarritoCo__Produ__66603565">
+            <End Role="Productos" EntitySet="Productos" />
+            <End Role="CarritoCompras" EntitySet="CarritoCompras" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CarritoCo__Usuar__656C112C" Association="Self.FK__CarritoCo__Usuar__656C112C">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="CarritoCompras" EntitySet="CarritoCompras" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Clientes__Usuari__412EB0B6" Association="Self.FK__Clientes__Usuari__412EB0B6">
             <End Role="Usuarios" EntitySet="Usuarios" />
             <End Role="Clientes" EntitySet="Clientes" />
           </AssociationSet>
-          <AssociationSet Name="FK__Pedidos__Cliente__44FF419A" Association="Self.FK__Pedidos__Cliente__44FF419A">
+          <AssociationSet Name="FK__Facturaci__Clien__5812160E" Association="Self.FK__Facturaci__Clien__5812160E">
+            <End Role="Clientes" EntitySet="Clientes" />
+            <End Role="Facturacion" EntitySet="Facturacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Pedidos__Cliente__47DBAE45" Association="Self.FK__Pedidos__Cliente__47DBAE45">
             <End Role="Clientes" EntitySet="Clientes" />
             <End Role="Pedidos" EntitySet="Pedidos" />
           </AssociationSet>
-          <AssociationSet Name="FK__Recibos__Cliente__4BAC3F29" Association="Self.FK__Recibos__Cliente__4BAC3F29">
+          <AssociationSet Name="FK__Recibos__Cliente__4E88ABD4" Association="Self.FK__Recibos__Cliente__4E88ABD4">
             <End Role="Clientes" EntitySet="Clientes" />
             <End Role="Recibos" EntitySet="Recibos" />
           </AssociationSet>
-          <AssociationSet Name="FK__DetallePe__Pedid__47DBAE45" Association="Self.FK__DetallePe__Pedid__47DBAE45">
+          <AssociationSet Name="FK__DetallePe__Pedid__4AB81AF0" Association="Self.FK__DetallePe__Pedid__4AB81AF0">
             <End Role="Pedidos" EntitySet="Pedidos" />
             <End Role="DetallePedido" EntitySet="DetallePedido" />
           </AssociationSet>
-          <AssociationSet Name="FK__DetallePe__Produ__48CFD27E" Association="Self.FK__DetallePe__Produ__48CFD27E">
+          <AssociationSet Name="FK__DetallePe__Produ__4BAC3F29" Association="Self.FK__DetallePe__Produ__4BAC3F29">
             <End Role="Productos" EntitySet="Productos" />
             <End Role="DetallePedido" EntitySet="DetallePedido" />
           </AssociationSet>
-          <AssociationSet Name="FK__Recibos__PedidoI__4CA06362" Association="Self.FK__Recibos__PedidoI__4CA06362">
+          <AssociationSet Name="FK__Facturaci__Pedid__571DF1D5" Association="Self.FK__Facturaci__Pedid__571DF1D5">
+            <End Role="Pedidos" EntitySet="Pedidos" />
+            <End Role="Facturacion" EntitySet="Facturacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Facturaci__Usuar__59063A47" Association="Self.FK__Facturaci__Usuar__59063A47">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="Facturacion" EntitySet="Facturacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Historial__Usuar__628FA481" Association="Self.FK__Historial__Usuar__628FA481">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="HistorialCambios" EntitySet="HistorialCambios" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ImagenesP__Produ__693CA210" Association="Self.FK__ImagenesP__Produ__693CA210">
+            <End Role="Productos" EntitySet="Productos" />
+            <End Role="ImagenesProducto" EntitySet="ImagenesProducto" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ImagenUsu__Usuar__3B75D760" Association="Self.FK__ImagenUsu__Usuar__3B75D760">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="ImagenUsuario" EntitySet="ImagenUsuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Recibos__PedidoI__4F7CD00D" Association="Self.FK__Recibos__PedidoI__4F7CD00D">
             <End Role="Pedidos" EntitySet="Pedidos" />
             <End Role="Recibos" EntitySet="Recibos" />
           </AssociationSet>
+          <AssociationSet Name="FK__Proveedor__Usuar__534D60F1" Association="Self.FK__Proveedor__Usuar__534D60F1">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="Proveedores" EntitySet="Proveedores" />
+          </AssociationSet>
+          <FunctionImport Name="CrearUsuario" ReturnType="Collection(String)">
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+            <Parameter Name="Correo" Mode="In" Type="String" />
+            <Parameter Name="Contraseña" Mode="In" Type="String" />
+            <Parameter Name="Rol" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GenerarRecibo">
+            <Parameter Name="ClienteID" Mode="In" Type="Int32" />
+            <Parameter Name="PedidoID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="LoginUsuario" ReturnType="Collection(MyIphonesvModel.LoginUsuario_Result)">
+            <Parameter Name="Correo" Mode="In" Type="String" />
+            <Parameter Name="Contraseña" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ReporteProductosMasVendido" ReturnType="Collection(MyIphonesvModel.ReporteProductosMasVendido_Result)" />
         </EntityContainer>
+        <ComplexType Name="LoginUsuario_Result">
+          <Property Type="Int32" Name="UsuarioID" Nullable="true" />
+          <Property Type="String" Name="Nombre" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Rol" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="ReporteProductosMasVendido_Result">
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="totalVendido" Nullable="true" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="MyIphonesvModelStoreContainer" CdmEntityContainer="MyIphonesvEntities">
+          <EntitySetMapping Name="Bodega">
+            <EntityTypeMapping TypeName="MyIphonesvModel.Bodega">
+              <MappingFragment StoreEntitySet="Bodega">
+                <ScalarProperty Name="TransaccionID" ColumnName="TransaccionID" />
+                <ScalarProperty Name="ProductoID" ColumnName="ProductoID" />
+                <ScalarProperty Name="TipoMovimiento" ColumnName="TipoMovimiento" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="ProveedorID" ColumnName="ProveedorID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CarritoCompras">
+            <EntityTypeMapping TypeName="MyIphonesvModel.CarritoCompras">
+              <MappingFragment StoreEntitySet="CarritoCompras">
+                <ScalarProperty Name="CarritoID" ColumnName="CarritoID" />
+                <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
+                <ScalarProperty Name="ProductoID" ColumnName="ProductoID" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Clientes">
             <EntityTypeMapping TypeName="MyIphonesvModel.Clientes">
               <MappingFragment StoreEntitySet="Clientes">
@@ -415,6 +1169,47 @@
                 <ScalarProperty Name="ProductoID" ColumnName="ProductoID" />
                 <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
                 <ScalarProperty Name="Subtotal" ColumnName="Subtotal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Facturacion">
+            <EntityTypeMapping TypeName="MyIphonesvModel.Facturacion">
+              <MappingFragment StoreEntitySet="Facturacion">
+                <ScalarProperty Name="FacturaID" ColumnName="FacturaID" />
+                <ScalarProperty Name="PedidoID" ColumnName="PedidoID" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="MontoTotal" ColumnName="MontoTotal" />
+                <ScalarProperty Name="ClienteID" ColumnName="ClienteID" />
+                <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HistorialCambios">
+            <EntityTypeMapping TypeName="MyIphonesvModel.HistorialCambios">
+              <MappingFragment StoreEntitySet="HistorialCambios">
+                <ScalarProperty Name="CambioID" ColumnName="CambioID" />
+                <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
+                <ScalarProperty Name="TablaAfectada" ColumnName="TablaAfectada" />
+                <ScalarProperty Name="FechaCambio" ColumnName="FechaCambio" />
+                <ScalarProperty Name="DescripcionCambio" ColumnName="DescripcionCambio" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ImagenesProducto">
+            <EntityTypeMapping TypeName="MyIphonesvModel.ImagenesProducto">
+              <MappingFragment StoreEntitySet="ImagenesProducto">
+                <ScalarProperty Name="ImagenID" ColumnName="ImagenID" />
+                <ScalarProperty Name="ProductoID" ColumnName="ProductoID" />
+                <ScalarProperty Name="URLImagen" ColumnName="URLImagen" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ImagenUsuario">
+            <EntityTypeMapping TypeName="MyIphonesvModel.ImagenUsuario">
+              <MappingFragment StoreEntitySet="ImagenUsuario">
+                <ScalarProperty Name="ImagenID" ColumnName="ImagenID" />
+                <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
+                <ScalarProperty Name="URLImagen" ColumnName="URLImagen" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -449,6 +1244,7 @@
                 <ScalarProperty Name="Correo" ColumnName="Correo" />
                 <ScalarProperty Name="Telefono" ColumnName="Telefono" />
                 <ScalarProperty Name="ProductoOfrecido" ColumnName="ProductoOfrecido" />
+                <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -479,6 +1275,78 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Vista_Admin">
+            <EntityTypeMapping TypeName="MyIphonesvModel.Vista_Admin">
+              <MappingFragment StoreEntitySet="Vista_Admin">
+                <ScalarProperty Name="Producto_ID" ColumnName="Producto_ID" />
+                <ScalarProperty Name="Producto_Nombre" ColumnName="Producto_Nombre" />
+                <ScalarProperty Name="Producto_Descripcion" ColumnName="Producto_Descripcion" />
+                <ScalarProperty Name="Producto_Precio" ColumnName="Producto_Precio" />
+                <ScalarProperty Name="Producto_Stock" ColumnName="Producto_Stock" />
+                <ScalarProperty Name="Cliente_ID" ColumnName="Cliente_ID" />
+                <ScalarProperty Name="Cliente_Nombre" ColumnName="Cliente_Nombre" />
+                <ScalarProperty Name="Cliente_Correo" ColumnName="Cliente_Correo" />
+                <ScalarProperty Name="Pedido_ID" ColumnName="Pedido_ID" />
+                <ScalarProperty Name="Pedido_Fecha" ColumnName="Pedido_Fecha" />
+                <ScalarProperty Name="Pedido_Total" ColumnName="Pedido_Total" />
+                <ScalarProperty Name="Pedido_Estado" ColumnName="Pedido_Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vista_CarritoCompras">
+            <EntityTypeMapping TypeName="MyIphonesvModel.Vista_CarritoCompras">
+              <MappingFragment StoreEntitySet="Vista_CarritoCompras">
+                <ScalarProperty Name="CarritoID" ColumnName="CarritoID" />
+                <ScalarProperty Name="UsuarioNombre" ColumnName="UsuarioNombre" />
+                <ScalarProperty Name="ProductoNombre" ColumnName="ProductoNombre" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="Subtotal" ColumnName="Subtotal" />
+                <ScalarProperty Name="ImagenProducto" ColumnName="ImagenProducto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vista_Empleados">
+            <EntityTypeMapping TypeName="MyIphonesvModel.Vista_Empleados">
+              <MappingFragment StoreEntitySet="Vista_Empleados">
+                <ScalarProperty Name="ClienteID" ColumnName="ClienteID" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Correo" ColumnName="Correo" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vista_Usuarios">
+            <EntityTypeMapping TypeName="MyIphonesvModel.Vista_Usuarios">
+              <MappingFragment StoreEntitySet="Vista_Usuarios">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="Stock" ColumnName="Stock" />
+                <ScalarProperty Name="Categoria" ColumnName="Categoria" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="CrearUsuario" FunctionName="MyIphonesvModel.Store.CrearUsuario" />
+          <FunctionImportMapping FunctionImportName="GenerarRecibo" FunctionName="MyIphonesvModel.Store.GenerarRecibo" />
+          <FunctionImportMapping FunctionImportName="LoginUsuario" FunctionName="MyIphonesvModel.Store.LoginUsuario">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MyIphonesvModel.LoginUsuario_Result">
+                <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Rol" ColumnName="Rol" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ReporteProductosMasVendido" FunctionName="MyIphonesvModel.Store.ReporteProductosMasVendido">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MyIphonesvModel.ReporteProductosMasVendido_Result">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="totalVendido" ColumnName="totalVendido" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

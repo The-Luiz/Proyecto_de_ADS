@@ -12,14 +12,12 @@ namespace AplicacionWebADS.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Vista_CarritoCompras
+    public partial class ImagenUsuario
     {
-        public int CarritoID { get; set; }
-        public string UsuarioNombre { get; set; }
-        public string ProductoNombre { get; set; }
-        public int Cantidad { get; set; }
-        public decimal Precio { get; set; }
-        public Nullable<decimal> Subtotal { get; set; }
-        public string ImagenProducto { get; set; }
+        public int ImagenID { get; set; }
+        public int UsuarioID { get; set; }
+        public string URLImagen { get; set; }
+    
+        public virtual Usuarios Usuarios { get; set; }
     }
 }

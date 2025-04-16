@@ -12,6 +12,8 @@ namespace AplicacionWebADS.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class MyIphonesvEntities : DbContext
     {
@@ -25,12 +27,74 @@ namespace AplicacionWebADS.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Bodega> Bodega { get; set; }
+        public virtual DbSet<CarritoCompras> CarritoCompras { get; set; }
         public virtual DbSet<Clientes> Clientes { get; set; }
         public virtual DbSet<DetallePedido> DetallePedido { get; set; }
+        public virtual DbSet<Facturacion> Facturacion { get; set; }
+        public virtual DbSet<HistorialCambios> HistorialCambios { get; set; }
+        public virtual DbSet<ImagenesProducto> ImagenesProducto { get; set; }
+        public virtual DbSet<ImagenUsuario> ImagenUsuario { get; set; }
         public virtual DbSet<Pedidos> Pedidos { get; set; }
         public virtual DbSet<Productos> Productos { get; set; }
         public virtual DbSet<Proveedores> Proveedores { get; set; }
         public virtual DbSet<Recibos> Recibos { get; set; }
         public virtual DbSet<Usuarios> Usuarios { get; set; }
+        public virtual DbSet<Vista_Admin> Vista_Admin { get; set; }
+        public virtual DbSet<Vista_CarritoCompras> Vista_CarritoCompras { get; set; }
+        public virtual DbSet<Vista_Empleados> Vista_Empleados { get; set; }
+        public virtual DbSet<Vista_Usuarios> Vista_Usuarios { get; set; }
+    
+        public virtual ObjectResult<string> CrearUsuario(string nombre, string correo, string contraseña, string rol)
+        {
+            var nombreParameter = nombre != null ?
+                new ObjectParameter("Nombre", nombre) :
+                new ObjectParameter("Nombre", typeof(string));
+    
+            var correoParameter = correo != null ?
+                new ObjectParameter("Correo", correo) :
+                new ObjectParameter("Correo", typeof(string));
+    
+            var contraseñaParameter = contraseña != null ?
+                new ObjectParameter("Contraseña", contraseña) :
+                new ObjectParameter("Contraseña", typeof(string));
+    
+            var rolParameter = rol != null ?
+                new ObjectParameter("Rol", rol) :
+                new ObjectParameter("Rol", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("CrearUsuario", nombreParameter, correoParameter, contraseñaParameter, rolParameter);
+        }
+    
+        public virtual int GenerarRecibo(Nullable<int> clienteID, Nullable<int> pedidoID)
+        {
+            var clienteIDParameter = clienteID.HasValue ?
+                new ObjectParameter("ClienteID", clienteID) :
+                new ObjectParameter("ClienteID", typeof(int));
+    
+            var pedidoIDParameter = pedidoID.HasValue ?
+                new ObjectParameter("PedidoID", pedidoID) :
+                new ObjectParameter("PedidoID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("GenerarRecibo", clienteIDParameter, pedidoIDParameter);
+        }
+    
+        public virtual ObjectResult<LoginUsuario_Result> LoginUsuario(string correo, string contraseña)
+        {
+            var correoParameter = correo != null ?
+                new ObjectParameter("Correo", correo) :
+                new ObjectParameter("Correo", typeof(string));
+    
+            var contraseñaParameter = contraseña != null ?
+                new ObjectParameter("Contraseña", contraseña) :
+                new ObjectParameter("Contraseña", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<LoginUsuario_Result>("LoginUsuario", correoParameter, contraseñaParameter);
+        }
+    
+        public virtual ObjectResult<ReporteProductosMasVendido_Result> ReporteProductosMasVendido()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReporteProductosMasVendido_Result>("ReporteProductosMasVendido");
+        }
     }
 }
