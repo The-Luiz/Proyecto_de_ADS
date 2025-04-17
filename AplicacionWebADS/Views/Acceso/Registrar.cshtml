@@ -1,0 +1,45 @@
+﻿@{
+    ViewBag.Title = "Registrarse";
+}
+
+<h2>Registrarse</h2>
+
+@using (Html.BeginForm("Registrar", "Acceso", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div>
+        <label for="nombre">Nombre:</label>
+        <input type="text" name="nombre" required />
+    </div>
+
+    <div>
+        <label for="correo">Correo:</label>
+        <input type="email" name="correo" required />
+    </div>
+
+    <div>
+        <label for="contraseña">Contraseña:</label>
+        <input type="password" name="contraseña" required />
+    </div>
+
+    <div>
+        <label for="rol">Rol:</label>
+        <select name="rol">
+            <option value="VIP">VIP</option>
+            <option value="Admin">Admin</option>
+            <option value="Proveedores">Proveedores</option>
+        </select>
+    </div>
+
+    <div>
+        <button type="submit">Crear Cuenta</button>
+    </div>
+
+    if (ViewBag.Mensaje != null)
+    {
+        <p style="color:red">@ViewBag.Mensaje</p>
+    }
+}
+
+<p>¿Ya tienes cuenta? <a href="@Url.Action("Login", "Acceso")">Inicia sesión</a></p>

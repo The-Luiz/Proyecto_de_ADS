@@ -1115,6 +1115,7 @@ advertencia 6002: La tabla o vista 'MyIphonesv.dbo.Vista_Usuarios' no tiene defi
           <Property Type="Int32" Name="UsuarioID" Nullable="true" />
           <Property Type="String" Name="Nombre" Nullable="true" MaxLength="100" />
           <Property Type="String" Name="Rol" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Mensaje" Nullable="true" MaxLength="200" />
         </ComplexType>
         <ComplexType Name="ReporteProductosMasVendido_Result">
           <Property Type="String" Name="Nombre" Nullable="false" MaxLength="100" />
@@ -1336,6 +1337,7 @@ advertencia 6002: La tabla o vista 'MyIphonesv.dbo.Vista_Usuarios' no tiene defi
                 <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="Rol" ColumnName="Rol" />
+                <ScalarProperty Name="Mensaje" ColumnName="Mensaje" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

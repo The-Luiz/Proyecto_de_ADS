@@ -120,82 +120,82 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AccesoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\BasedeDatos.Context.cs">
+    <Compile Include="Models\BaseiPhoneSV.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>BasedeDatos.Context.tt</DependentUpon>
+      <DependentUpon>BaseiPhoneSV.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\BasedeDatos.cs" />
-    <Compile Include="Models\BasedeDatos.Designer.cs">
-      <DependentUpon>BasedeDatos.edmx</DependentUpon>
+    <Compile Include="Models\BaseiPhoneSV.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+      <DependentUpon>BaseiPhoneSV.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\BasedeDatos1.cs">
+    <Compile Include="Models\BaseiPhoneSV.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>BasedeDatos.tt</DependentUpon>
+      <DependentUpon>BaseiPhoneSV.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Bodega.cs">
-      <DependentUpon>BasedeDatos.tt</DependentUpon>
+      <DependentUpon>BaseiPhoneSV.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CarritoCompras.cs">
-      <DependentUpon>BasedeDatos.tt</DependentUpon>
+      <DependentUpon>BaseiPhoneSV.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Clientes.cs">
-      <DependentUpon>BasedeDatos.tt</DependentUpon>
+      <DependentUpon>BaseiPhoneSV.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DetallePedido.cs">
-      <DependentUpon>BasedeDatos.tt</DependentUpon>
+      <DependentUpon>BaseiPhoneSV.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Facturacion.cs">
-      <DependentUpon>BasedeDatos.tt</DependentUpon>
+      <DependentUpon>BaseiPhoneSV.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\HistorialCambios.cs">
-      <DependentUpon>BasedeDatos.tt</DependentUpon>
+      <DependentUpon>BaseiPhoneSV.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ImagenesProducto.cs">
-      <DependentUpon>BasedeDatos.tt</DependentUpon>
+      <DependentUpon>BaseiPhoneSV.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ImagenUsuario.cs">
-      <DependentUpon>BasedeDatos.tt</DependentUpon>
+      <DependentUpon>BaseiPhoneSV.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\LoginUsuario_Result.cs">
-      <DependentUpon>BasedeDatos.tt</DependentUpon>
+      <DependentUpon>BaseiPhoneSV.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Pedidos.cs">
-      <DependentUpon>BasedeDatos.tt</DependentUpon>
+      <DependentUpon>BaseiPhoneSV.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Productos.cs">
-      <DependentUpon>BasedeDatos.tt</DependentUpon>
+      <DependentUpon>BaseiPhoneSV.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Proveedores.cs">
-      <DependentUpon>BasedeDatos.tt</DependentUpon>
+      <DependentUpon>BaseiPhoneSV.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Recibos.cs">
-      <DependentUpon>BasedeDatos.tt</DependentUpon>
+      <DependentUpon>BaseiPhoneSV.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ReporteProductosMasVendido_Result.cs">
-      <DependentUpon>BasedeDatos.tt</DependentUpon>
+      <DependentUpon>BaseiPhoneSV.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Usuarios.cs">
-      <DependentUpon>BasedeDatos.tt</DependentUpon>
+      <DependentUpon>BaseiPhoneSV.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Vista_Admin.cs">
-      <DependentUpon>BasedeDatos.tt</DependentUpon>
+      <DependentUpon>BaseiPhoneSV.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Vista_CarritoCompras.cs">
-      <DependentUpon>BasedeDatos.tt</DependentUpon>
+      <DependentUpon>BaseiPhoneSV.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Vista_Empleados.cs">
-      <DependentUpon>BasedeDatos.tt</DependentUpon>
+      <DependentUpon>BaseiPhoneSV.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Vista_Usuarios.cs">
-      <DependentUpon>BasedeDatos.tt</DependentUpon>
+      <DependentUpon>BaseiPhoneSV.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -219,15 +219,15 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Models\BasedeDatos.Context.tt">
+    <Content Include="Models\BaseiPhoneSV.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>BasedeDatos.edmx</DependentUpon>
-      <LastGenOutput>BasedeDatos.Context.cs</LastGenOutput>
+      <DependentUpon>BaseiPhoneSV.edmx</DependentUpon>
+      <LastGenOutput>BaseiPhoneSV.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\BasedeDatos.tt">
+    <Content Include="Models\BaseiPhoneSV.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>BasedeDatos.edmx</DependentUpon>
-      <LastGenOutput>BasedeDatos1.cs</LastGenOutput>
+      <DependentUpon>BaseiPhoneSV.edmx</DependentUpon>
+      <LastGenOutput>BaseiPhoneSV.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -235,12 +235,12 @@
     <Content Include="Scripts\bootstrap.esm.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EntityDeploy Include="Models\BasedeDatos.edmx">
+    <EntityDeploy Include="Models\BaseiPhoneSV.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>BasedeDatos.Designer.cs</LastGenOutput>
+      <LastGenOutput>BaseiPhoneSV.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\BasedeDatos.edmx.diagram">
-      <DependentUpon>BasedeDatos.edmx</DependentUpon>
+    <Content Include="Models\BaseiPhoneSV.edmx.diagram">
+      <DependentUpon>BaseiPhoneSV.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
@@ -262,6 +262,8 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Acceso\Login.cshtml" />
+    <Content Include="Views\Acceso\Registrar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

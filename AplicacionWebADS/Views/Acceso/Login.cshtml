@@ -1,0 +1,32 @@
+﻿
+@{
+    ViewBag.Title = "IniciarSesion";
+}
+
+<h2>Iniciar Sesión</h2>
+
+@using (Html.BeginForm("Login", "Acceso", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div>
+        <label for="correo">Correo:</label>
+        <input type="email" name="correo" required />
+    </div>
+
+    <div>
+        <label for="contraseña">Contraseña:</label>
+        <input type="password" name="contraseña" required />
+    </div>
+
+    <div>
+        <button type="submit">Iniciar Sesión</button>
+    </div>
+
+    if (ViewBag.Mensaje != null)
+    {
+        <p style="color:red">@ViewBag.Mensaje</p>
+    }
+}
+
+<p>¿No tienes cuenta? <a href="@Url.Action("Registrar", "Acceso")">Regístrate aquí</a></p>
