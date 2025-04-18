@@ -51,7 +51,7 @@ namespace AplicacionWebADS.Controllers
         // POST: Acceso/Registrar
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Registrar(string nombre, string correo, string contraseña, string rol = "VIP")
+        public ActionResult Registrar(string nombre, string correo, string contraseña, string rol = "Nuevo")
         {
             if (string.IsNullOrWhiteSpace(nombre) ||
               string.IsNullOrWhiteSpace(correo) ||
@@ -61,7 +61,7 @@ namespace AplicacionWebADS.Controllers
                 return View();
             }
 
-            var msgResult = db.CrearUsuario(nombre, correo, contraseña, rol).FirstOrDefault();
+            var msgResult = db.CrearUsuario(nombre, correo, contraseña).FirstOrDefault();
 
             ViewBag.Mensaje = msgResult;
             if (msgResult == "Cuenta creada exitosamente")
