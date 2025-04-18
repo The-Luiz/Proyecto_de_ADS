@@ -120,67 +120,84 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AccesoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ProductosController.cs" />
     <Compile Include="Controllers\UsuariosController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\BaseDatos.Context.cs">
+    <Compile Include="Models\BaseDeDatos.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>BaseDatos.Context.tt</DependentUpon>
+      <DependentUpon>BaseDeDatos.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\BaseDatos.cs">
+    <Compile Include="Models\BaseDeDatos.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>BaseDatos.tt</DependentUpon>
+      <DependentUpon>BaseDeDatos.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\BaseDatos.Designer.cs">
+    <Compile Include="Models\BaseDeDatos.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>BaseDatos.edmx</DependentUpon>
+      <DependentUpon>BaseDeDatos.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Bodega.cs">
-      <DependentUpon>BaseDatos.tt</DependentUpon>
+      <DependentUpon>BaseDeDatos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CarritoCompras.cs">
+      <DependentUpon>BaseDeDatos.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Clientes.cs">
-      <DependentUpon>BaseDatos.tt</DependentUpon>
+      <DependentUpon>BaseDeDatos.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DetallePedido.cs">
-      <DependentUpon>BaseDatos.tt</DependentUpon>
+      <DependentUpon>BaseDeDatos.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Facturacion.cs">
-      <DependentUpon>BaseDatos.tt</DependentUpon>
+      <DependentUpon>BaseDeDatos.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\HistorialCambios.cs">
-      <DependentUpon>BaseDatos.tt</DependentUpon>
+      <DependentUpon>BaseDeDatos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ImagenesProducto.cs">
+      <DependentUpon>BaseDeDatos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ImagenUsuario.cs">
+      <DependentUpon>BaseDeDatos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LoginUsuario_Result.cs">
+      <DependentUpon>BaseDeDatos.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Pedidos.cs">
-      <DependentUpon>BaseDatos.tt</DependentUpon>
+      <DependentUpon>BaseDeDatos.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Productos.cs">
-      <DependentUpon>BaseDatos.tt</DependentUpon>
+      <DependentUpon>BaseDeDatos.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Proveedores.cs">
-      <DependentUpon>BaseDatos.tt</DependentUpon>
+      <DependentUpon>BaseDeDatos.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Recibos.cs">
-      <DependentUpon>BaseDatos.tt</DependentUpon>
+      <DependentUpon>BaseDeDatos.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ReporteProductosMasVendido_Result.cs">
-      <DependentUpon>BaseDatos.tt</DependentUpon>
+      <DependentUpon>BaseDeDatos.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Usuarios.cs">
-      <DependentUpon>BaseDatos.tt</DependentUpon>
+      <DependentUpon>BaseDeDatos.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Vista_Admin.cs">
-      <DependentUpon>BaseDatos.tt</DependentUpon>
+      <DependentUpon>BaseDeDatos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Vista_CarritoCompras.cs">
+      <DependentUpon>BaseDeDatos.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Vista_Empleados.cs">
-      <DependentUpon>BaseDatos.tt</DependentUpon>
+      <DependentUpon>BaseDeDatos.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Vista_Usuarios.cs">
-      <DependentUpon>BaseDatos.tt</DependentUpon>
+      <DependentUpon>BaseDeDatos.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -204,15 +221,15 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Models\BaseDatos.Context.tt">
+    <Content Include="Models\BaseDeDatos.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>BaseDatos.edmx</DependentUpon>
-      <LastGenOutput>BaseDatos.Context.cs</LastGenOutput>
+      <DependentUpon>BaseDeDatos.edmx</DependentUpon>
+      <LastGenOutput>BaseDeDatos.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\BaseDatos.tt">
+    <Content Include="Models\BaseDeDatos.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>BaseDatos.edmx</DependentUpon>
-      <LastGenOutput>BaseDatos.cs</LastGenOutput>
+      <DependentUpon>BaseDeDatos.edmx</DependentUpon>
+      <LastGenOutput>BaseDeDatos.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -220,12 +237,12 @@
     <Content Include="Scripts\bootstrap.esm.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EntityDeploy Include="Models\BaseDatos.edmx">
+    <EntityDeploy Include="Models\BaseDeDatos.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>BaseDatos.Designer.cs</LastGenOutput>
+      <LastGenOutput>BaseDeDatos.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\BaseDatos.edmx.diagram">
-      <DependentUpon>BaseDatos.edmx</DependentUpon>
+    <Content Include="Models\BaseDeDatos.edmx.diagram">
+      <DependentUpon>BaseDeDatos.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
@@ -247,7 +264,18 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Acceso\Login.cshtml" />
+    <Content Include="Views\Acceso\Registrar.cshtml" />
+    <Content Include="Views\Usuarios\Create.cshtml" />
+    <Content Include="Views\Usuarios\Delete.cshtml" />
+    <Content Include="Views\Usuarios\Details.cshtml" />
+    <Content Include="Views\Usuarios\Edit.cshtml" />
     <Content Include="Views\Usuarios\Index.cshtml" />
+    <Content Include="Views\Productos\Create.cshtml" />
+    <Content Include="Views\Productos\Delete.cshtml" />
+    <Content Include="Views\Productos\Details.cshtml" />
+    <Content Include="Views\Productos\Edit.cshtml" />
+    <Content Include="Views\Productos\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -18,7 +18,9 @@ namespace AplicacionWebADS.Models
         public Productos()
         {
             this.Bodega = new HashSet<Bodega>();
+            this.CarritoCompras = new HashSet<CarritoCompras>();
             this.DetallePedido = new HashSet<DetallePedido>();
+            this.ImagenesProducto = new HashSet<ImagenesProducto>();
         }
     
         public int ProductoID { get; set; }
@@ -31,6 +33,10 @@ namespace AplicacionWebADS.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Bodega> Bodega { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CarritoCompras> CarritoCompras { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DetallePedido> DetallePedido { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ImagenesProducto> ImagenesProducto { get; set; }
     }
 }
