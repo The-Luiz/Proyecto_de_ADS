@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="c837af068b1342e4903c75e03b7cf9f5" Name="Diagram1">
+      <Diagram DiagramId="4b8c7a63cc3644d1acd9116834f3dafc" Name="Diagram1">
         <EntityTypeShape EntityType="MyIphonesvModel.Bodega" Width="1.5" PointX="5.25" PointY="19" IsExpanded="true" />
         <EntityTypeShape EntityType="MyIphonesvModel.CarritoCompras" Width="1.5" PointX="6" PointY="9.625" IsExpanded="true" />
         <EntityTypeShape EntityType="MyIphonesvModel.Clientes" Width="1.5" PointX="3" PointY="9.75" IsExpanded="true" />
@@ -22,23 +22,23 @@
         <EntityTypeShape EntityType="MyIphonesvModel.Vista_CarritoCompras" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="MyIphonesvModel.Vista_Empleados" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="MyIphonesvModel.Vista_Usuarios" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
-        <AssociationConnector Association="MyIphonesvModel.FK__Bodega__Producto__5DCAEF64" ManuallyRouted="false" />
-        <AssociationConnector Association="MyIphonesvModel.FK__Bodega__Proveedo__5EBF139D" ManuallyRouted="false" />
-        <AssociationConnector Association="MyIphonesvModel.FK__CarritoCo__Produ__66603565" ManuallyRouted="false" />
-        <AssociationConnector Association="MyIphonesvModel.FK__CarritoCo__Usuar__656C112C" ManuallyRouted="false" />
+        <AssociationConnector Association="MyIphonesvModel.FK__Bodega__Producto__5EBF139D" ManuallyRouted="false" />
+        <AssociationConnector Association="MyIphonesvModel.FK__Bodega__Proveedo__5FB337D6" ManuallyRouted="false" />
+        <AssociationConnector Association="MyIphonesvModel.FK__CarritoCo__Produ__6754599E" ManuallyRouted="false" />
+        <AssociationConnector Association="MyIphonesvModel.FK__CarritoCo__Usuar__66603565" ManuallyRouted="false" />
         <AssociationConnector Association="MyIphonesvModel.FK__Clientes__Usuari__412EB0B6" ManuallyRouted="false" />
-        <AssociationConnector Association="MyIphonesvModel.FK__Facturaci__Clien__5812160E" ManuallyRouted="false" />
-        <AssociationConnector Association="MyIphonesvModel.FK__Pedidos__Cliente__47DBAE45" ManuallyRouted="false" />
-        <AssociationConnector Association="MyIphonesvModel.FK__Recibos__Cliente__4E88ABD4" ManuallyRouted="false" />
-        <AssociationConnector Association="MyIphonesvModel.FK__DetallePe__Pedid__4AB81AF0" ManuallyRouted="false" />
-        <AssociationConnector Association="MyIphonesvModel.FK__DetallePe__Produ__4BAC3F29" ManuallyRouted="false" />
-        <AssociationConnector Association="MyIphonesvModel.FK__Facturaci__Pedid__571DF1D5" ManuallyRouted="false" />
-        <AssociationConnector Association="MyIphonesvModel.FK__Facturaci__Usuar__59063A47" ManuallyRouted="false" />
-        <AssociationConnector Association="MyIphonesvModel.FK__Historial__Usuar__628FA481" ManuallyRouted="false" />
-        <AssociationConnector Association="MyIphonesvModel.FK__ImagenesP__Produ__693CA210" ManuallyRouted="false" />
+        <AssociationConnector Association="MyIphonesvModel.FK__Facturaci__Clien__59063A47" ManuallyRouted="false" />
+        <AssociationConnector Association="MyIphonesvModel.FK__Pedidos__Cliente__48CFD27E" ManuallyRouted="false" />
+        <AssociationConnector Association="MyIphonesvModel.FK__Recibos__Cliente__4F7CD00D" ManuallyRouted="false" />
+        <AssociationConnector Association="MyIphonesvModel.FK__DetallePe__Pedid__4BAC3F29" ManuallyRouted="false" />
+        <AssociationConnector Association="MyIphonesvModel.FK__DetallePe__Produ__4CA06362" ManuallyRouted="false" />
+        <AssociationConnector Association="MyIphonesvModel.FK__Facturaci__Pedid__5812160E" ManuallyRouted="false" />
+        <AssociationConnector Association="MyIphonesvModel.FK__Facturaci__Usuar__59FA5E80" ManuallyRouted="false" />
+        <AssociationConnector Association="MyIphonesvModel.FK__Historial__Usuar__6383C8BA" ManuallyRouted="false" />
+        <AssociationConnector Association="MyIphonesvModel.FK__ImagenesP__Produ__6A30C649" ManuallyRouted="false" />
         <AssociationConnector Association="MyIphonesvModel.FK__ImagenUsu__Usuar__3B75D760" ManuallyRouted="false" />
-        <AssociationConnector Association="MyIphonesvModel.FK__Recibos__PedidoI__4F7CD00D" ManuallyRouted="false" />
-        <AssociationConnector Association="MyIphonesvModel.FK__Proveedor__Usuar__534D60F1" ManuallyRouted="false" />
+        <AssociationConnector Association="MyIphonesvModel.FK__Recibos__PedidoI__5070F446" ManuallyRouted="false" />
+        <AssociationConnector Association="MyIphonesvModel.FK__Proveedor__Usuar__5441852A" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
