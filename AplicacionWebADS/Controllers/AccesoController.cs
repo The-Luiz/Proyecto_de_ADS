@@ -51,7 +51,7 @@ namespace AplicacionWebADS.Controllers
         // POST: Acceso/Registrar
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Registrar(string nombre, string correo, string contraseña, string rol = "Nuevo")
+        public ActionResult Registrar(string nombre, string correo, string contraseña, string rol)
         {
             if (string.IsNullOrWhiteSpace(nombre) ||
               string.IsNullOrWhiteSpace(correo) ||
