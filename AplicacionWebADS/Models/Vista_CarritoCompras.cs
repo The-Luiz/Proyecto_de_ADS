@@ -20,5 +20,6 @@ namespace AplicacionWebADS.Models
         public int Cantidad { get; set; }
         public decimal Precio { get; set; }
         public Nullable<decimal> Subtotal { get; set; }
+        public string ImagenProducto { get; set; }
     }
 }

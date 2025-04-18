@@ -76,6 +76,14 @@
           <Property Name="ProductoID" Type="int" Nullable="false" />
           <Property Name="URLImagen" Type="nvarchar" MaxLength="255" Nullable="false" />
         </EntityType>
+        <EntityType Name="ImagenUsuario">
+          <Key>
+            <PropertyRef Name="ImagenID" />
+          </Key>
+          <Property Name="ImagenID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UsuarioID" Type="int" Nullable="false" />
+          <Property Name="URLImagen" Type="nvarchar" MaxLength="255" Nullable="false" />
+        </EntityType>
         <EntityType Name="Pedidos">
           <Key>
             <PropertyRef Name="PedidoID" />
@@ -177,6 +185,7 @@ advertencia 6002: La tabla o vista 'MyIphonesv.dbo.Vista_CarritoCompras' no tien
           <Property Name="Cantidad" Type="int" Nullable="false" />
           <Property Name="Precio" Type="decimal" Precision="10" Scale="2" Nullable="false" />
           <Property Name="Subtotal" Type="decimal" Precision="21" Scale="2" />
+          <Property Name="ImagenProducto" Type="nvarchar" MaxLength="255" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'MyIphonesv.dbo.Vista_Empleados' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -207,7 +216,7 @@ advertencia 6002: La tabla o vista 'MyIphonesv.dbo.Vista_Usuarios' no tiene defi
           <Property Name="Stock" Type="int" Nullable="false" />
           <Property Name="Categoria" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <Association Name="FK__Bodega__Producto__5AEE82B9">
+        <Association Name="FK__Bodega__Producto__619B8048">
           <End Role="Productos" Type="Self.Productos" Multiplicity="1" />
           <End Role="Bodega" Type="Self.Bodega" Multiplicity="*" />
           <ReferentialConstraint>
@@ -219,7 +228,7 @@ advertencia 6002: La tabla o vista 'MyIphonesv.dbo.Vista_Usuarios' no tiene defi
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Bodega__Proveedo__5BE2A6F2">
+        <Association Name="FK__Bodega__Proveedo__628FA481">
           <End Role="Proveedores" Type="Self.Proveedores" Multiplicity="0..1" />
           <End Role="Bodega" Type="Self.Bodega" Multiplicity="*" />
           <ReferentialConstraint>
@@ -231,7 +240,7 @@ advertencia 6002: La tabla o vista 'MyIphonesv.dbo.Vista_Usuarios' no tiene defi
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__CarritoCo__Produ__6383C8BA">
+        <Association Name="FK__CarritoCo__Produ__6A30C649">
           <End Role="Productos" Type="Self.Productos" Multiplicity="1" />
           <End Role="CarritoCompras" Type="Self.CarritoCompras" Multiplicity="*" />
           <ReferentialConstraint>
@@ -243,7 +252,7 @@ advertencia 6002: La tabla o vista 'MyIphonesv.dbo.Vista_Usuarios' no tiene defi
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__CarritoCo__Usuar__628FA481">
+        <Association Name="FK__CarritoCo__Usuar__693CA210">
           <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
           <End Role="CarritoCompras" Type="Self.CarritoCompras" Multiplicity="*" />
           <ReferentialConstraint>
@@ -255,7 +264,7 @@ advertencia 6002: La tabla o vista 'MyIphonesv.dbo.Vista_Usuarios' no tiene defi
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Clientes__Usuari__3E52440B">
+        <Association Name="FK__Clientes__Usuari__44FF419A">
           <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="0..1" />
           <End Role="Clientes" Type="Self.Clientes" Multiplicity="*" />
           <ReferentialConstraint>
@@ -267,7 +276,7 @@ advertencia 6002: La tabla o vista 'MyIphonesv.dbo.Vista_Usuarios' no tiene defi
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__DetallePe__Pedid__47DBAE45">
+        <Association Name="FK__DetallePe__Pedid__4E88ABD4">
           <End Role="Pedidos" Type="Self.Pedidos" Multiplicity="1" />
           <End Role="DetallePedido" Type="Self.DetallePedido" Multiplicity="*" />
           <ReferentialConstraint>
@@ -279,7 +288,7 @@ advertencia 6002: La tabla o vista 'MyIphonesv.dbo.Vista_Usuarios' no tiene defi
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__DetallePe__Produ__48CFD27E">
+        <Association Name="FK__DetallePe__Produ__4F7CD00D">
           <End Role="Productos" Type="Self.Productos" Multiplicity="1" />
           <End Role="DetallePedido" Type="Self.DetallePedido" Multiplicity="*" />
           <ReferentialConstraint>
@@ -291,7 +300,7 @@ advertencia 6002: La tabla o vista 'MyIphonesv.dbo.Vista_Usuarios' no tiene defi
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Facturaci__Clien__5535A963">
+        <Association Name="FK__Facturaci__Clien__5BE2A6F2">
           <End Role="Clientes" Type="Self.Clientes" Multiplicity="1" />
           <End Role="Facturacion" Type="Self.Facturacion" Multiplicity="*" />
           <ReferentialConstraint>
@@ -303,7 +312,7 @@ advertencia 6002: La tabla o vista 'MyIphonesv.dbo.Vista_Usuarios' no tiene defi
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Facturaci__Pedid__5441852A">
+        <Association Name="FK__Facturaci__Pedid__5AEE82B9">
           <End Role="Pedidos" Type="Self.Pedidos" Multiplicity="1" />
           <End Role="Facturacion" Type="Self.Facturacion" Multiplicity="*" />
           <ReferentialConstraint>
@@ -315,7 +324,7 @@ advertencia 6002: La tabla o vista 'MyIphonesv.dbo.Vista_Usuarios' no tiene defi
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Facturaci__Usuar__5629CD9C">
+        <Association Name="FK__Facturaci__Usuar__5CD6CB2B">
           <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="0..1" />
           <End Role="Facturacion" Type="Self.Facturacion" Multiplicity="*" />
           <ReferentialConstraint>
@@ -327,7 +336,7 @@ advertencia 6002: La tabla o vista 'MyIphonesv.dbo.Vista_Usuarios' no tiene defi
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Historial__Usuar__5FB337D6">
+        <Association Name="FK__Historial__Usuar__66603565">
           <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
           <End Role="HistorialCambios" Type="Self.HistorialCambios" Multiplicity="*" />
           <ReferentialConstraint>
@@ -339,7 +348,7 @@ advertencia 6002: La tabla o vista 'MyIphonesv.dbo.Vista_Usuarios' no tiene defi
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ImagenesP__Produ__66603565">
+        <Association Name="FK__ImagenesP__Produ__6D0D32F4">
           <End Role="Productos" Type="Self.Productos" Multiplicity="1" />
           <End Role="ImagenesProducto" Type="Self.ImagenesProducto" Multiplicity="*" />
           <ReferentialConstraint>
@@ -351,7 +360,19 @@ advertencia 6002: La tabla o vista 'MyIphonesv.dbo.Vista_Usuarios' no tiene defi
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Pedidos__Cliente__44FF419A">
+        <Association Name="FK__ImagenUsu__Usuar__3E52440B">
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+          <End Role="ImagenUsuario" Type="Self.ImagenUsuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="UsuarioID" />
+            </Principal>
+            <Dependent Role="ImagenUsuario">
+              <PropertyRef Name="UsuarioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Pedidos__Cliente__4BAC3F29">
           <End Role="Clientes" Type="Self.Clientes" Multiplicity="1" />
           <End Role="Pedidos" Type="Self.Pedidos" Multiplicity="*" />
           <ReferentialConstraint>
@@ -363,7 +384,7 @@ advertencia 6002: La tabla o vista 'MyIphonesv.dbo.Vista_Usuarios' no tiene defi
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Proveedor__Usuar__5070F446">
+        <Association Name="FK__Proveedor__Usuar__571DF1D5">
           <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="0..1" />
           <End Role="Proveedores" Type="Self.Proveedores" Multiplicity="*" />
           <ReferentialConstraint>
@@ -375,7 +396,7 @@ advertencia 6002: La tabla o vista 'MyIphonesv.dbo.Vista_Usuarios' no tiene defi
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Recibos__Cliente__4BAC3F29">
+        <Association Name="FK__Recibos__Cliente__52593CB8">
           <End Role="Clientes" Type="Self.Clientes" Multiplicity="1" />
           <End Role="Recibos" Type="Self.Recibos" Multiplicity="*" />
           <ReferentialConstraint>
@@ -387,7 +408,7 @@ advertencia 6002: La tabla o vista 'MyIphonesv.dbo.Vista_Usuarios' no tiene defi
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Recibos__PedidoI__4CA06362">
+        <Association Name="FK__Recibos__PedidoI__534D60F1">
           <End Role="Pedidos" Type="Self.Pedidos" Multiplicity="1" />
           <End Role="Recibos" Type="Self.Recibos" Multiplicity="*" />
           <ReferentialConstraint>
@@ -403,7 +424,6 @@ advertencia 6002: La tabla o vista 'MyIphonesv.dbo.Vista_Usuarios' no tiene defi
           <Parameter Name="Nombre" Type="varchar" Mode="In" />
           <Parameter Name="Correo" Type="varchar" Mode="In" />
           <Parameter Name="Contraseña" Type="nvarchar" Mode="In" />
-          <Parameter Name="Rol" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="GenerarRecibo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ClienteID" Type="int" Mode="In" />
@@ -422,6 +442,7 @@ advertencia 6002: La tabla o vista 'MyIphonesv.dbo.Vista_Usuarios' no tiene defi
           <EntitySet Name="Facturacion" EntityType="Self.Facturacion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HistorialCambios" EntityType="Self.HistorialCambios" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ImagenesProducto" EntityType="Self.ImagenesProducto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ImagenUsuario" EntityType="Self.ImagenUsuario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Pedidos" EntityType="Self.Pedidos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Productos" EntityType="Self.Productos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Proveedores" EntityType="Self.Proveedores" Schema="dbo" store:Type="Tables" />
@@ -450,7 +471,8 @@ advertencia 6002: La tabla o vista 'MyIphonesv.dbo.Vista_Usuarios' no tiene defi
     [Vista_CarritoCompras].[ProductoNombre] AS [ProductoNombre], 
     [Vista_CarritoCompras].[Cantidad] AS [Cantidad], 
     [Vista_CarritoCompras].[Precio] AS [Precio], 
-    [Vista_CarritoCompras].[Subtotal] AS [Subtotal]
+    [Vista_CarritoCompras].[Subtotal] AS [Subtotal], 
+    [Vista_CarritoCompras].[ImagenProducto] AS [ImagenProducto]
     FROM [dbo].[Vista_CarritoCompras] AS [Vista_CarritoCompras]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="Vista_Empleados" EntityType="Self.Vista_Empleados" store:Type="Views" store:Schema="dbo">
@@ -471,67 +493,71 @@ advertencia 6002: La tabla o vista 'MyIphonesv.dbo.Vista_Usuarios' no tiene defi
     [Vista_Usuarios].[Categoria] AS [Categoria]
     FROM [dbo].[Vista_Usuarios] AS [Vista_Usuarios]</DefiningQuery>
           </EntitySet>
-          <AssociationSet Name="FK__Bodega__Producto__5AEE82B9" Association="Self.FK__Bodega__Producto__5AEE82B9">
+          <AssociationSet Name="FK__Bodega__Producto__619B8048" Association="Self.FK__Bodega__Producto__619B8048">
             <End Role="Productos" EntitySet="Productos" />
             <End Role="Bodega" EntitySet="Bodega" />
           </AssociationSet>
-          <AssociationSet Name="FK__Bodega__Proveedo__5BE2A6F2" Association="Self.FK__Bodega__Proveedo__5BE2A6F2">
+          <AssociationSet Name="FK__Bodega__Proveedo__628FA481" Association="Self.FK__Bodega__Proveedo__628FA481">
             <End Role="Proveedores" EntitySet="Proveedores" />
             <End Role="Bodega" EntitySet="Bodega" />
           </AssociationSet>
-          <AssociationSet Name="FK__CarritoCo__Produ__6383C8BA" Association="Self.FK__CarritoCo__Produ__6383C8BA">
+          <AssociationSet Name="FK__CarritoCo__Produ__6A30C649" Association="Self.FK__CarritoCo__Produ__6A30C649">
             <End Role="Productos" EntitySet="Productos" />
             <End Role="CarritoCompras" EntitySet="CarritoCompras" />
           </AssociationSet>
-          <AssociationSet Name="FK__CarritoCo__Usuar__628FA481" Association="Self.FK__CarritoCo__Usuar__628FA481">
+          <AssociationSet Name="FK__CarritoCo__Usuar__693CA210" Association="Self.FK__CarritoCo__Usuar__693CA210">
             <End Role="Usuarios" EntitySet="Usuarios" />
             <End Role="CarritoCompras" EntitySet="CarritoCompras" />
           </AssociationSet>
-          <AssociationSet Name="FK__Clientes__Usuari__3E52440B" Association="Self.FK__Clientes__Usuari__3E52440B">
+          <AssociationSet Name="FK__Clientes__Usuari__44FF419A" Association="Self.FK__Clientes__Usuari__44FF419A">
             <End Role="Usuarios" EntitySet="Usuarios" />
             <End Role="Clientes" EntitySet="Clientes" />
           </AssociationSet>
-          <AssociationSet Name="FK__DetallePe__Pedid__47DBAE45" Association="Self.FK__DetallePe__Pedid__47DBAE45">
+          <AssociationSet Name="FK__DetallePe__Pedid__4E88ABD4" Association="Self.FK__DetallePe__Pedid__4E88ABD4">
             <End Role="Pedidos" EntitySet="Pedidos" />
             <End Role="DetallePedido" EntitySet="DetallePedido" />
           </AssociationSet>
-          <AssociationSet Name="FK__DetallePe__Produ__48CFD27E" Association="Self.FK__DetallePe__Produ__48CFD27E">
+          <AssociationSet Name="FK__DetallePe__Produ__4F7CD00D" Association="Self.FK__DetallePe__Produ__4F7CD00D">
             <End Role="Productos" EntitySet="Productos" />
             <End Role="DetallePedido" EntitySet="DetallePedido" />
           </AssociationSet>
-          <AssociationSet Name="FK__Facturaci__Clien__5535A963" Association="Self.FK__Facturaci__Clien__5535A963">
+          <AssociationSet Name="FK__Facturaci__Clien__5BE2A6F2" Association="Self.FK__Facturaci__Clien__5BE2A6F2">
             <End Role="Clientes" EntitySet="Clientes" />
             <End Role="Facturacion" EntitySet="Facturacion" />
           </AssociationSet>
-          <AssociationSet Name="FK__Facturaci__Pedid__5441852A" Association="Self.FK__Facturaci__Pedid__5441852A">
+          <AssociationSet Name="FK__Facturaci__Pedid__5AEE82B9" Association="Self.FK__Facturaci__Pedid__5AEE82B9">
             <End Role="Pedidos" EntitySet="Pedidos" />
             <End Role="Facturacion" EntitySet="Facturacion" />
           </AssociationSet>
-          <AssociationSet Name="FK__Facturaci__Usuar__5629CD9C" Association="Self.FK__Facturaci__Usuar__5629CD9C">
+          <AssociationSet Name="FK__Facturaci__Usuar__5CD6CB2B" Association="Self.FK__Facturaci__Usuar__5CD6CB2B">
             <End Role="Usuarios" EntitySet="Usuarios" />
             <End Role="Facturacion" EntitySet="Facturacion" />
           </AssociationSet>
-          <AssociationSet Name="FK__Historial__Usuar__5FB337D6" Association="Self.FK__Historial__Usuar__5FB337D6">
+          <AssociationSet Name="FK__Historial__Usuar__66603565" Association="Self.FK__Historial__Usuar__66603565">
             <End Role="Usuarios" EntitySet="Usuarios" />
             <End Role="HistorialCambios" EntitySet="HistorialCambios" />
           </AssociationSet>
-          <AssociationSet Name="FK__ImagenesP__Produ__66603565" Association="Self.FK__ImagenesP__Produ__66603565">
+          <AssociationSet Name="FK__ImagenesP__Produ__6D0D32F4" Association="Self.FK__ImagenesP__Produ__6D0D32F4">
             <End Role="Productos" EntitySet="Productos" />
             <End Role="ImagenesProducto" EntitySet="ImagenesProducto" />
           </AssociationSet>
-          <AssociationSet Name="FK__Pedidos__Cliente__44FF419A" Association="Self.FK__Pedidos__Cliente__44FF419A">
+          <AssociationSet Name="FK__ImagenUsu__Usuar__3E52440B" Association="Self.FK__ImagenUsu__Usuar__3E52440B">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="ImagenUsuario" EntitySet="ImagenUsuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Pedidos__Cliente__4BAC3F29" Association="Self.FK__Pedidos__Cliente__4BAC3F29">
             <End Role="Clientes" EntitySet="Clientes" />
             <End Role="Pedidos" EntitySet="Pedidos" />
           </AssociationSet>
-          <AssociationSet Name="FK__Proveedor__Usuar__5070F446" Association="Self.FK__Proveedor__Usuar__5070F446">
+          <AssociationSet Name="FK__Proveedor__Usuar__571DF1D5" Association="Self.FK__Proveedor__Usuar__571DF1D5">
             <End Role="Usuarios" EntitySet="Usuarios" />
             <End Role="Proveedores" EntitySet="Proveedores" />
           </AssociationSet>
-          <AssociationSet Name="FK__Recibos__Cliente__4BAC3F29" Association="Self.FK__Recibos__Cliente__4BAC3F29">
+          <AssociationSet Name="FK__Recibos__Cliente__52593CB8" Association="Self.FK__Recibos__Cliente__52593CB8">
             <End Role="Clientes" EntitySet="Clientes" />
             <End Role="Recibos" EntitySet="Recibos" />
           </AssociationSet>
-          <AssociationSet Name="FK__Recibos__PedidoI__4CA06362" Association="Self.FK__Recibos__PedidoI__4CA06362">
+          <AssociationSet Name="FK__Recibos__PedidoI__534D60F1" Association="Self.FK__Recibos__PedidoI__534D60F1">
             <End Role="Pedidos" EntitySet="Pedidos" />
             <End Role="Recibos" EntitySet="Recibos" />
           </AssociationSet>
@@ -551,8 +577,8 @@ advertencia 6002: La tabla o vista 'MyIphonesv.dbo.Vista_Usuarios' no tiene defi
           <Property Name="Cantidad" Type="Int32" Nullable="false" />
           <Property Name="Fecha" Type="DateTime" Precision="3" />
           <Property Name="ProveedorID" Type="Int32" />
-          <NavigationProperty Name="Productos" Relationship="Self.FK__Bodega__Producto__5AEE82B9" FromRole="Bodega" ToRole="Productos" />
-          <NavigationProperty Name="Proveedores" Relationship="Self.FK__Bodega__Proveedo__5BE2A6F2" FromRole="Bodega" ToRole="Proveedores" />
+          <NavigationProperty Name="Productos" Relationship="Self.FK__Bodega__Producto__619B8048" FromRole="Bodega" ToRole="Productos" />
+          <NavigationProperty Name="Proveedores" Relationship="Self.FK__Bodega__Proveedo__628FA481" FromRole="Bodega" ToRole="Proveedores" />
         </EntityType>
         <EntityType Name="CarritoCompras">
           <Key>
@@ -562,8 +588,8 @@ advertencia 6002: La tabla o vista 'MyIphonesv.dbo.Vista_Usuarios' no tiene defi
           <Property Name="UsuarioID" Type="Int32" Nullable="false" />
           <Property Name="ProductoID" Type="Int32" Nullable="false" />
           <Property Name="Cantidad" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Productos" Relationship="Self.FK__CarritoCo__Produ__6383C8BA" FromRole="CarritoCompras" ToRole="Productos" />
-          <NavigationProperty Name="Usuarios" Relationship="Self.FK__CarritoCo__Usuar__628FA481" FromRole="CarritoCompras" ToRole="Usuarios" />
+          <NavigationProperty Name="Productos" Relationship="Self.FK__CarritoCo__Produ__6A30C649" FromRole="CarritoCompras" ToRole="Productos" />
+          <NavigationProperty Name="Usuarios" Relationship="Self.FK__CarritoCo__Usuar__693CA210" FromRole="CarritoCompras" ToRole="Usuarios" />
         </EntityType>
         <EntityType Name="Clientes">
           <Key>
@@ -576,10 +602,10 @@ advertencia 6002: La tabla o vista 'MyIphonesv.dbo.Vista_Usuarios' no tiene defi
           <Property Name="Direccion" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="UsuarioID" Type="Int32" />
           <Property Name="Rol" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Usuarios" Relationship="Self.FK__Clientes__Usuari__3E52440B" FromRole="Clientes" ToRole="Usuarios" />
-          <NavigationProperty Name="Facturacion" Relationship="Self.FK__Facturaci__Clien__5535A963" FromRole="Clientes" ToRole="Facturacion" />
-          <NavigationProperty Name="Pedidos" Relationship="Self.FK__Pedidos__Cliente__44FF419A" FromRole="Clientes" ToRole="Pedidos" />
-          <NavigationProperty Name="Recibos" Relationship="Self.FK__Recibos__Cliente__4BAC3F29" FromRole="Clientes" ToRole="Recibos" />
+          <NavigationProperty Name="Usuarios" Relationship="Self.FK__Clientes__Usuari__44FF419A" FromRole="Clientes" ToRole="Usuarios" />
+          <NavigationProperty Name="Facturacion" Relationship="Self.FK__Facturaci__Clien__5BE2A6F2" FromRole="Clientes" ToRole="Facturacion" />
+          <NavigationProperty Name="Pedidos" Relationship="Self.FK__Pedidos__Cliente__4BAC3F29" FromRole="Clientes" ToRole="Pedidos" />
+          <NavigationProperty Name="Recibos" Relationship="Self.FK__Recibos__Cliente__52593CB8" FromRole="Clientes" ToRole="Recibos" />
         </EntityType>
         <EntityType Name="DetallePedido">
           <Key>
@@ -590,8 +616,8 @@ advertencia 6002: La tabla o vista 'MyIphonesv.dbo.Vista_Usuarios' no tiene defi
           <Property Name="ProductoID" Type="Int32" Nullable="false" />
           <Property Name="Cantidad" Type="Int32" Nullable="false" />
           <Property Name="Subtotal" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
-          <NavigationProperty Name="Pedidos" Relationship="Self.FK__DetallePe__Pedid__47DBAE45" FromRole="DetallePedido" ToRole="Pedidos" />
-          <NavigationProperty Name="Productos" Relationship="Self.FK__DetallePe__Produ__48CFD27E" FromRole="DetallePedido" ToRole="Productos" />
+          <NavigationProperty Name="Pedidos" Relationship="Self.FK__DetallePe__Pedid__4E88ABD4" FromRole="DetallePedido" ToRole="Pedidos" />
+          <NavigationProperty Name="Productos" Relationship="Self.FK__DetallePe__Produ__4F7CD00D" FromRole="DetallePedido" ToRole="Productos" />
         </EntityType>
         <EntityType Name="Facturacion">
           <Key>
@@ -603,9 +629,9 @@ advertencia 6002: La tabla o vista 'MyIphonesv.dbo.Vista_Usuarios' no tiene defi
           <Property Name="MontoTotal" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
           <Property Name="ClienteID" Type="Int32" Nullable="false" />
           <Property Name="UsuarioID" Type="Int32" />
-          <NavigationProperty Name="Clientes" Relationship="Self.FK__Facturaci__Clien__5535A963" FromRole="Facturacion" ToRole="Clientes" />
-          <NavigationProperty Name="Pedidos" Relationship="Self.FK__Facturaci__Pedid__5441852A" FromRole="Facturacion" ToRole="Pedidos" />
-          <NavigationProperty Name="Usuarios" Relationship="Self.FK__Facturaci__Usuar__5629CD9C" FromRole="Facturacion" ToRole="Usuarios" />
+          <NavigationProperty Name="Clientes" Relationship="Self.FK__Facturaci__Clien__5BE2A6F2" FromRole="Facturacion" ToRole="Clientes" />
+          <NavigationProperty Name="Pedidos" Relationship="Self.FK__Facturaci__Pedid__5AEE82B9" FromRole="Facturacion" ToRole="Pedidos" />
+          <NavigationProperty Name="Usuarios" Relationship="Self.FK__Facturaci__Usuar__5CD6CB2B" FromRole="Facturacion" ToRole="Usuarios" />
         </EntityType>
         <EntityType Name="HistorialCambios">
           <Key>
@@ -616,7 +642,7 @@ advertencia 6002: La tabla o vista 'MyIphonesv.dbo.Vista_Usuarios' no tiene defi
           <Property Name="TablaAfectada" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="FechaCambio" Type="DateTime" Precision="3" />
           <Property Name="DescripcionCambio" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Usuarios" Relationship="Self.FK__Historial__Usuar__5FB337D6" FromRole="HistorialCambios" ToRole="Usuarios" />
+          <NavigationProperty Name="Usuarios" Relationship="Self.FK__Historial__Usuar__66603565" FromRole="HistorialCambios" ToRole="Usuarios" />
         </EntityType>
         <EntityType Name="ImagenesProducto">
           <Key>
@@ -625,7 +651,16 @@ advertencia 6002: La tabla o vista 'MyIphonesv.dbo.Vista_Usuarios' no tiene defi
           <Property Name="ImagenID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ProductoID" Type="Int32" Nullable="false" />
           <Property Name="URLImagen" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Productos" Relationship="Self.FK__ImagenesP__Produ__66603565" FromRole="ImagenesProducto" ToRole="Productos" />
+          <NavigationProperty Name="Productos" Relationship="Self.FK__ImagenesP__Produ__6D0D32F4" FromRole="ImagenesProducto" ToRole="Productos" />
+        </EntityType>
+        <EntityType Name="ImagenUsuario">
+          <Key>
+            <PropertyRef Name="ImagenID" />
+          </Key>
+          <Property Name="ImagenID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UsuarioID" Type="Int32" Nullable="false" />
+          <Property Name="URLImagen" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Usuarios" Relationship="Self.FK__ImagenUsu__Usuar__3E52440B" FromRole="ImagenUsuario" ToRole="Usuarios" />
         </EntityType>
         <EntityType Name="Pedidos">
           <Key>
@@ -636,10 +671,10 @@ advertencia 6002: La tabla o vista 'MyIphonesv.dbo.Vista_Usuarios' no tiene defi
           <Property Name="FechaPedido" Type="DateTime" Precision="3" />
           <Property Name="Total" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
           <Property Name="Estado" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Clientes" Relationship="Self.FK__Pedidos__Cliente__44FF419A" FromRole="Pedidos" ToRole="Clientes" />
-          <NavigationProperty Name="DetallePedido" Relationship="Self.FK__DetallePe__Pedid__47DBAE45" FromRole="Pedidos" ToRole="DetallePedido" />
-          <NavigationProperty Name="Facturacion" Relationship="Self.FK__Facturaci__Pedid__5441852A" FromRole="Pedidos" ToRole="Facturacion" />
-          <NavigationProperty Name="Recibos" Relationship="Self.FK__Recibos__PedidoI__4CA06362" FromRole="Pedidos" ToRole="Recibos" />
+          <NavigationProperty Name="Clientes" Relationship="Self.FK__Pedidos__Cliente__4BAC3F29" FromRole="Pedidos" ToRole="Clientes" />
+          <NavigationProperty Name="DetallePedido" Relationship="Self.FK__DetallePe__Pedid__4E88ABD4" FromRole="Pedidos" ToRole="DetallePedido" />
+          <NavigationProperty Name="Facturacion" Relationship="Self.FK__Facturaci__Pedid__5AEE82B9" FromRole="Pedidos" ToRole="Facturacion" />
+          <NavigationProperty Name="Recibos" Relationship="Self.FK__Recibos__PedidoI__534D60F1" FromRole="Pedidos" ToRole="Recibos" />
         </EntityType>
         <EntityType Name="Productos">
           <Key>
@@ -651,10 +686,10 @@ advertencia 6002: La tabla o vista 'MyIphonesv.dbo.Vista_Usuarios' no tiene defi
           <Property Name="Precio" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
           <Property Name="Stock" Type="Int32" Nullable="false" />
           <Property Name="Categoria" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Bodega" Relationship="Self.FK__Bodega__Producto__5AEE82B9" FromRole="Productos" ToRole="Bodega" />
-          <NavigationProperty Name="CarritoCompras" Relationship="Self.FK__CarritoCo__Produ__6383C8BA" FromRole="Productos" ToRole="CarritoCompras" />
-          <NavigationProperty Name="DetallePedido" Relationship="Self.FK__DetallePe__Produ__48CFD27E" FromRole="Productos" ToRole="DetallePedido" />
-          <NavigationProperty Name="ImagenesProducto" Relationship="Self.FK__ImagenesP__Produ__66603565" FromRole="Productos" ToRole="ImagenesProducto" />
+          <NavigationProperty Name="Bodega" Relationship="Self.FK__Bodega__Producto__619B8048" FromRole="Productos" ToRole="Bodega" />
+          <NavigationProperty Name="CarritoCompras" Relationship="Self.FK__CarritoCo__Produ__6A30C649" FromRole="Productos" ToRole="CarritoCompras" />
+          <NavigationProperty Name="DetallePedido" Relationship="Self.FK__DetallePe__Produ__4F7CD00D" FromRole="Productos" ToRole="DetallePedido" />
+          <NavigationProperty Name="ImagenesProducto" Relationship="Self.FK__ImagenesP__Produ__6D0D32F4" FromRole="Productos" ToRole="ImagenesProducto" />
         </EntityType>
         <EntityType Name="Proveedores">
           <Key>
@@ -666,8 +701,8 @@ advertencia 6002: La tabla o vista 'MyIphonesv.dbo.Vista_Usuarios' no tiene defi
           <Property Name="Telefono" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="ProductoOfrecido" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="UsuarioID" Type="Int32" />
-          <NavigationProperty Name="Bodega" Relationship="Self.FK__Bodega__Proveedo__5BE2A6F2" FromRole="Proveedores" ToRole="Bodega" />
-          <NavigationProperty Name="Usuarios" Relationship="Self.FK__Proveedor__Usuar__5070F446" FromRole="Proveedores" ToRole="Usuarios" />
+          <NavigationProperty Name="Bodega" Relationship="Self.FK__Bodega__Proveedo__628FA481" FromRole="Proveedores" ToRole="Bodega" />
+          <NavigationProperty Name="Usuarios" Relationship="Self.FK__Proveedor__Usuar__571DF1D5" FromRole="Proveedores" ToRole="Usuarios" />
         </EntityType>
         <EntityType Name="Recibos">
           <Key>
@@ -683,8 +718,8 @@ advertencia 6002: La tabla o vista 'MyIphonesv.dbo.Vista_Usuarios' no tiene defi
           <Property Name="TotalPedido" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
           <Property Name="EstadoPedido" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="DetallesPedido" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Clientes" Relationship="Self.FK__Recibos__Cliente__4BAC3F29" FromRole="Recibos" ToRole="Clientes" />
-          <NavigationProperty Name="Pedidos" Relationship="Self.FK__Recibos__PedidoI__4CA06362" FromRole="Recibos" ToRole="Pedidos" />
+          <NavigationProperty Name="Clientes" Relationship="Self.FK__Recibos__Cliente__52593CB8" FromRole="Recibos" ToRole="Clientes" />
+          <NavigationProperty Name="Pedidos" Relationship="Self.FK__Recibos__PedidoI__534D60F1" FromRole="Recibos" ToRole="Pedidos" />
         </EntityType>
         <EntityType Name="Usuarios">
           <Key>
@@ -695,11 +730,12 @@ advertencia 6002: La tabla o vista 'MyIphonesv.dbo.Vista_Usuarios' no tiene defi
           <Property Name="Correo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Contraseña" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Rol" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="CarritoCompras" Relationship="Self.FK__CarritoCo__Usuar__628FA481" FromRole="Usuarios" ToRole="CarritoCompras" />
-          <NavigationProperty Name="Clientes" Relationship="Self.FK__Clientes__Usuari__3E52440B" FromRole="Usuarios" ToRole="Clientes" />
-          <NavigationProperty Name="Facturacion" Relationship="Self.FK__Facturaci__Usuar__5629CD9C" FromRole="Usuarios" ToRole="Facturacion" />
-          <NavigationProperty Name="HistorialCambios" Relationship="Self.FK__Historial__Usuar__5FB337D6" FromRole="Usuarios" ToRole="HistorialCambios" />
-          <NavigationProperty Name="Proveedores" Relationship="Self.FK__Proveedor__Usuar__5070F446" FromRole="Usuarios" ToRole="Proveedores" />
+          <NavigationProperty Name="CarritoCompras" Relationship="Self.FK__CarritoCo__Usuar__693CA210" FromRole="Usuarios" ToRole="CarritoCompras" />
+          <NavigationProperty Name="Clientes" Relationship="Self.FK__Clientes__Usuari__44FF419A" FromRole="Usuarios" ToRole="Clientes" />
+          <NavigationProperty Name="Facturacion" Relationship="Self.FK__Facturaci__Usuar__5CD6CB2B" FromRole="Usuarios" ToRole="Facturacion" />
+          <NavigationProperty Name="HistorialCambios" Relationship="Self.FK__Historial__Usuar__66603565" FromRole="Usuarios" ToRole="HistorialCambios" />
+          <NavigationProperty Name="ImagenUsuario" Relationship="Self.FK__ImagenUsu__Usuar__3E52440B" FromRole="Usuarios" ToRole="ImagenUsuario" />
+          <NavigationProperty Name="Proveedores" Relationship="Self.FK__Proveedor__Usuar__571DF1D5" FromRole="Usuarios" ToRole="Proveedores" />
         </EntityType>
         <EntityType Name="Vista_Admin">
           <Key>
@@ -741,6 +777,7 @@ advertencia 6002: La tabla o vista 'MyIphonesv.dbo.Vista_Usuarios' no tiene defi
           <Property Name="Cantidad" Type="Int32" Nullable="false" />
           <Property Name="Precio" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
           <Property Name="Subtotal" Type="Decimal" Precision="21" Scale="2" />
+          <Property Name="ImagenProducto" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Vista_Empleados">
           <Key>
@@ -767,7 +804,7 @@ advertencia 6002: La tabla o vista 'MyIphonesv.dbo.Vista_Usuarios' no tiene defi
           <Property Name="Stock" Type="Int32" Nullable="false" />
           <Property Name="Categoria" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
         </EntityType>
-        <Association Name="FK__Bodega__Producto__5AEE82B9">
+        <Association Name="FK__Bodega__Producto__619B8048">
           <End Role="Productos" Type="Self.Productos" Multiplicity="1" />
           <End Role="Bodega" Type="Self.Bodega" Multiplicity="*" />
           <ReferentialConstraint>
@@ -779,7 +816,7 @@ advertencia 6002: La tabla o vista 'MyIphonesv.dbo.Vista_Usuarios' no tiene defi
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Bodega__Proveedo__5BE2A6F2">
+        <Association Name="FK__Bodega__Proveedo__628FA481">
           <End Role="Proveedores" Type="Self.Proveedores" Multiplicity="0..1" />
           <End Role="Bodega" Type="Self.Bodega" Multiplicity="*" />
           <ReferentialConstraint>
@@ -791,7 +828,7 @@ advertencia 6002: La tabla o vista 'MyIphonesv.dbo.Vista_Usuarios' no tiene defi
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__CarritoCo__Produ__6383C8BA">
+        <Association Name="FK__CarritoCo__Produ__6A30C649">
           <End Role="Productos" Type="Self.Productos" Multiplicity="1" />
           <End Role="CarritoCompras" Type="Self.CarritoCompras" Multiplicity="*" />
           <ReferentialConstraint>
@@ -803,7 +840,7 @@ advertencia 6002: La tabla o vista 'MyIphonesv.dbo.Vista_Usuarios' no tiene defi
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__CarritoCo__Usuar__628FA481">
+        <Association Name="FK__CarritoCo__Usuar__693CA210">
           <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
           <End Role="CarritoCompras" Type="Self.CarritoCompras" Multiplicity="*" />
           <ReferentialConstraint>
@@ -815,7 +852,7 @@ advertencia 6002: La tabla o vista 'MyIphonesv.dbo.Vista_Usuarios' no tiene defi
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Clientes__Usuari__3E52440B">
+        <Association Name="FK__Clientes__Usuari__44FF419A">
           <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="0..1" />
           <End Role="Clientes" Type="Self.Clientes" Multiplicity="*" />
           <ReferentialConstraint>
@@ -827,7 +864,7 @@ advertencia 6002: La tabla o vista 'MyIphonesv.dbo.Vista_Usuarios' no tiene defi
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Facturaci__Clien__5535A963">
+        <Association Name="FK__Facturaci__Clien__5BE2A6F2">
           <End Role="Clientes" Type="Self.Clientes" Multiplicity="1" />
           <End Role="Facturacion" Type="Self.Facturacion" Multiplicity="*" />
           <ReferentialConstraint>
@@ -839,7 +876,7 @@ advertencia 6002: La tabla o vista 'MyIphonesv.dbo.Vista_Usuarios' no tiene defi
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Pedidos__Cliente__44FF419A">
+        <Association Name="FK__Pedidos__Cliente__4BAC3F29">
           <End Role="Clientes" Type="Self.Clientes" Multiplicity="1" />
           <End Role="Pedidos" Type="Self.Pedidos" Multiplicity="*" />
           <ReferentialConstraint>
@@ -851,7 +888,7 @@ advertencia 6002: La tabla o vista 'MyIphonesv.dbo.Vista_Usuarios' no tiene defi
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Recibos__Cliente__4BAC3F29">
+        <Association Name="FK__Recibos__Cliente__52593CB8">
           <End Role="Clientes" Type="Self.Clientes" Multiplicity="1" />
           <End Role="Recibos" Type="Self.Recibos" Multiplicity="*" />
           <ReferentialConstraint>
@@ -863,7 +900,7 @@ advertencia 6002: La tabla o vista 'MyIphonesv.dbo.Vista_Usuarios' no tiene defi
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__DetallePe__Pedid__47DBAE45">
+        <Association Name="FK__DetallePe__Pedid__4E88ABD4">
           <End Role="Pedidos" Type="Self.Pedidos" Multiplicity="1" />
           <End Role="DetallePedido" Type="Self.DetallePedido" Multiplicity="*" />
           <ReferentialConstraint>
@@ -875,7 +912,7 @@ advertencia 6002: La tabla o vista 'MyIphonesv.dbo.Vista_Usuarios' no tiene defi
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__DetallePe__Produ__48CFD27E">
+        <Association Name="FK__DetallePe__Produ__4F7CD00D">
           <End Role="Productos" Type="Self.Productos" Multiplicity="1" />
           <End Role="DetallePedido" Type="Self.DetallePedido" Multiplicity="*" />
           <ReferentialConstraint>
@@ -887,7 +924,7 @@ advertencia 6002: La tabla o vista 'MyIphonesv.dbo.Vista_Usuarios' no tiene defi
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Facturaci__Pedid__5441852A">
+        <Association Name="FK__Facturaci__Pedid__5AEE82B9">
           <End Role="Pedidos" Type="Self.Pedidos" Multiplicity="1" />
           <End Role="Facturacion" Type="Self.Facturacion" Multiplicity="*" />
           <ReferentialConstraint>
@@ -899,7 +936,7 @@ advertencia 6002: La tabla o vista 'MyIphonesv.dbo.Vista_Usuarios' no tiene defi
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Facturaci__Usuar__5629CD9C">
+        <Association Name="FK__Facturaci__Usuar__5CD6CB2B">
           <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="0..1" />
           <End Role="Facturacion" Type="Self.Facturacion" Multiplicity="*" />
           <ReferentialConstraint>
@@ -911,7 +948,7 @@ advertencia 6002: La tabla o vista 'MyIphonesv.dbo.Vista_Usuarios' no tiene defi
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Historial__Usuar__5FB337D6">
+        <Association Name="FK__Historial__Usuar__66603565">
           <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
           <End Role="HistorialCambios" Type="Self.HistorialCambios" Multiplicity="*" />
           <ReferentialConstraint>
@@ -923,7 +960,7 @@ advertencia 6002: La tabla o vista 'MyIphonesv.dbo.Vista_Usuarios' no tiene defi
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ImagenesP__Produ__66603565">
+        <Association Name="FK__ImagenesP__Produ__6D0D32F4">
           <End Role="Productos" Type="Self.Productos" Multiplicity="1" />
           <End Role="ImagenesProducto" Type="Self.ImagenesProducto" Multiplicity="*" />
           <ReferentialConstraint>
@@ -935,7 +972,19 @@ advertencia 6002: La tabla o vista 'MyIphonesv.dbo.Vista_Usuarios' no tiene defi
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Recibos__PedidoI__4CA06362">
+        <Association Name="FK__ImagenUsu__Usuar__3E52440B">
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+          <End Role="ImagenUsuario" Type="Self.ImagenUsuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="UsuarioID" />
+            </Principal>
+            <Dependent Role="ImagenUsuario">
+              <PropertyRef Name="UsuarioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Recibos__PedidoI__534D60F1">
           <End Role="Pedidos" Type="Self.Pedidos" Multiplicity="1" />
           <End Role="Recibos" Type="Self.Recibos" Multiplicity="*" />
           <ReferentialConstraint>
@@ -947,7 +996,7 @@ advertencia 6002: La tabla o vista 'MyIphonesv.dbo.Vista_Usuarios' no tiene defi
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Proveedor__Usuar__5070F446">
+        <Association Name="FK__Proveedor__Usuar__571DF1D5">
           <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="0..1" />
           <End Role="Proveedores" Type="Self.Proveedores" Multiplicity="*" />
           <ReferentialConstraint>
@@ -967,6 +1016,7 @@ advertencia 6002: La tabla o vista 'MyIphonesv.dbo.Vista_Usuarios' no tiene defi
           <EntitySet Name="Facturacion" EntityType="Self.Facturacion" />
           <EntitySet Name="HistorialCambios" EntityType="Self.HistorialCambios" />
           <EntitySet Name="ImagenesProducto" EntityType="Self.ImagenesProducto" />
+          <EntitySet Name="ImagenUsuario" EntityType="Self.ImagenUsuario" />
           <EntitySet Name="Pedidos" EntityType="Self.Pedidos" />
           <EntitySet Name="Productos" EntityType="Self.Productos" />
           <EntitySet Name="Proveedores" EntityType="Self.Proveedores" />
@@ -976,67 +1026,71 @@ advertencia 6002: La tabla o vista 'MyIphonesv.dbo.Vista_Usuarios' no tiene defi
           <EntitySet Name="Vista_CarritoCompras" EntityType="Self.Vista_CarritoCompras" />
           <EntitySet Name="Vista_Empleados" EntityType="Self.Vista_Empleados" />
           <EntitySet Name="Vista_Usuarios" EntityType="Self.Vista_Usuarios" />
-          <AssociationSet Name="FK__Bodega__Producto__5AEE82B9" Association="Self.FK__Bodega__Producto__5AEE82B9">
+          <AssociationSet Name="FK__Bodega__Producto__619B8048" Association="Self.FK__Bodega__Producto__619B8048">
             <End Role="Productos" EntitySet="Productos" />
             <End Role="Bodega" EntitySet="Bodega" />
           </AssociationSet>
-          <AssociationSet Name="FK__Bodega__Proveedo__5BE2A6F2" Association="Self.FK__Bodega__Proveedo__5BE2A6F2">
+          <AssociationSet Name="FK__Bodega__Proveedo__628FA481" Association="Self.FK__Bodega__Proveedo__628FA481">
             <End Role="Proveedores" EntitySet="Proveedores" />
             <End Role="Bodega" EntitySet="Bodega" />
           </AssociationSet>
-          <AssociationSet Name="FK__CarritoCo__Produ__6383C8BA" Association="Self.FK__CarritoCo__Produ__6383C8BA">
+          <AssociationSet Name="FK__CarritoCo__Produ__6A30C649" Association="Self.FK__CarritoCo__Produ__6A30C649">
             <End Role="Productos" EntitySet="Productos" />
             <End Role="CarritoCompras" EntitySet="CarritoCompras" />
           </AssociationSet>
-          <AssociationSet Name="FK__CarritoCo__Usuar__628FA481" Association="Self.FK__CarritoCo__Usuar__628FA481">
+          <AssociationSet Name="FK__CarritoCo__Usuar__693CA210" Association="Self.FK__CarritoCo__Usuar__693CA210">
             <End Role="Usuarios" EntitySet="Usuarios" />
             <End Role="CarritoCompras" EntitySet="CarritoCompras" />
           </AssociationSet>
-          <AssociationSet Name="FK__Clientes__Usuari__3E52440B" Association="Self.FK__Clientes__Usuari__3E52440B">
+          <AssociationSet Name="FK__Clientes__Usuari__44FF419A" Association="Self.FK__Clientes__Usuari__44FF419A">
             <End Role="Usuarios" EntitySet="Usuarios" />
             <End Role="Clientes" EntitySet="Clientes" />
           </AssociationSet>
-          <AssociationSet Name="FK__Facturaci__Clien__5535A963" Association="Self.FK__Facturaci__Clien__5535A963">
+          <AssociationSet Name="FK__Facturaci__Clien__5BE2A6F2" Association="Self.FK__Facturaci__Clien__5BE2A6F2">
             <End Role="Clientes" EntitySet="Clientes" />
             <End Role="Facturacion" EntitySet="Facturacion" />
           </AssociationSet>
-          <AssociationSet Name="FK__Pedidos__Cliente__44FF419A" Association="Self.FK__Pedidos__Cliente__44FF419A">
+          <AssociationSet Name="FK__Pedidos__Cliente__4BAC3F29" Association="Self.FK__Pedidos__Cliente__4BAC3F29">
             <End Role="Clientes" EntitySet="Clientes" />
             <End Role="Pedidos" EntitySet="Pedidos" />
           </AssociationSet>
-          <AssociationSet Name="FK__Recibos__Cliente__4BAC3F29" Association="Self.FK__Recibos__Cliente__4BAC3F29">
+          <AssociationSet Name="FK__Recibos__Cliente__52593CB8" Association="Self.FK__Recibos__Cliente__52593CB8">
             <End Role="Clientes" EntitySet="Clientes" />
             <End Role="Recibos" EntitySet="Recibos" />
           </AssociationSet>
-          <AssociationSet Name="FK__DetallePe__Pedid__47DBAE45" Association="Self.FK__DetallePe__Pedid__47DBAE45">
+          <AssociationSet Name="FK__DetallePe__Pedid__4E88ABD4" Association="Self.FK__DetallePe__Pedid__4E88ABD4">
             <End Role="Pedidos" EntitySet="Pedidos" />
             <End Role="DetallePedido" EntitySet="DetallePedido" />
           </AssociationSet>
-          <AssociationSet Name="FK__DetallePe__Produ__48CFD27E" Association="Self.FK__DetallePe__Produ__48CFD27E">
+          <AssociationSet Name="FK__DetallePe__Produ__4F7CD00D" Association="Self.FK__DetallePe__Produ__4F7CD00D">
             <End Role="Productos" EntitySet="Productos" />
             <End Role="DetallePedido" EntitySet="DetallePedido" />
           </AssociationSet>
-          <AssociationSet Name="FK__Facturaci__Pedid__5441852A" Association="Self.FK__Facturaci__Pedid__5441852A">
+          <AssociationSet Name="FK__Facturaci__Pedid__5AEE82B9" Association="Self.FK__Facturaci__Pedid__5AEE82B9">
             <End Role="Pedidos" EntitySet="Pedidos" />
             <End Role="Facturacion" EntitySet="Facturacion" />
           </AssociationSet>
-          <AssociationSet Name="FK__Facturaci__Usuar__5629CD9C" Association="Self.FK__Facturaci__Usuar__5629CD9C">
+          <AssociationSet Name="FK__Facturaci__Usuar__5CD6CB2B" Association="Self.FK__Facturaci__Usuar__5CD6CB2B">
             <End Role="Usuarios" EntitySet="Usuarios" />
             <End Role="Facturacion" EntitySet="Facturacion" />
           </AssociationSet>
-          <AssociationSet Name="FK__Historial__Usuar__5FB337D6" Association="Self.FK__Historial__Usuar__5FB337D6">
+          <AssociationSet Name="FK__Historial__Usuar__66603565" Association="Self.FK__Historial__Usuar__66603565">
             <End Role="Usuarios" EntitySet="Usuarios" />
             <End Role="HistorialCambios" EntitySet="HistorialCambios" />
           </AssociationSet>
-          <AssociationSet Name="FK__ImagenesP__Produ__66603565" Association="Self.FK__ImagenesP__Produ__66603565">
+          <AssociationSet Name="FK__ImagenesP__Produ__6D0D32F4" Association="Self.FK__ImagenesP__Produ__6D0D32F4">
             <End Role="Productos" EntitySet="Productos" />
             <End Role="ImagenesProducto" EntitySet="ImagenesProducto" />
           </AssociationSet>
-          <AssociationSet Name="FK__Recibos__PedidoI__4CA06362" Association="Self.FK__Recibos__PedidoI__4CA06362">
+          <AssociationSet Name="FK__ImagenUsu__Usuar__3E52440B" Association="Self.FK__ImagenUsu__Usuar__3E52440B">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="ImagenUsuario" EntitySet="ImagenUsuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Recibos__PedidoI__534D60F1" Association="Self.FK__Recibos__PedidoI__534D60F1">
             <End Role="Pedidos" EntitySet="Pedidos" />
             <End Role="Recibos" EntitySet="Recibos" />
           </AssociationSet>
-          <AssociationSet Name="FK__Proveedor__Usuar__5070F446" Association="Self.FK__Proveedor__Usuar__5070F446">
+          <AssociationSet Name="FK__Proveedor__Usuar__571DF1D5" Association="Self.FK__Proveedor__Usuar__571DF1D5">
             <End Role="Usuarios" EntitySet="Usuarios" />
             <End Role="Proveedores" EntitySet="Proveedores" />
           </AssociationSet>
@@ -1044,7 +1098,6 @@ advertencia 6002: La tabla o vista 'MyIphonesv.dbo.Vista_Usuarios' no tiene defi
             <Parameter Name="Nombre" Mode="In" Type="String" />
             <Parameter Name="Correo" Mode="In" Type="String" />
             <Parameter Name="Contraseña" Mode="In" Type="String" />
-            <Parameter Name="Rol" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="GenerarRecibo">
             <Parameter Name="ClienteID" Mode="In" Type="Int32" />
@@ -1060,6 +1113,7 @@ advertencia 6002: La tabla o vista 'MyIphonesv.dbo.Vista_Usuarios' no tiene defi
           <Property Type="Int32" Name="UsuarioID" Nullable="true" />
           <Property Type="String" Name="Nombre" Nullable="true" MaxLength="100" />
           <Property Type="String" Name="Rol" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Mensaje" Nullable="true" MaxLength="200" />
         </ComplexType>
         <ComplexType Name="ReporteProductosMasVendido_Result">
           <Property Type="String" Name="Nombre" Nullable="false" MaxLength="100" />
@@ -1145,6 +1199,15 @@ advertencia 6002: La tabla o vista 'MyIphonesv.dbo.Vista_Usuarios' no tiene defi
               <MappingFragment StoreEntitySet="ImagenesProducto">
                 <ScalarProperty Name="ImagenID" ColumnName="ImagenID" />
                 <ScalarProperty Name="ProductoID" ColumnName="ProductoID" />
+                <ScalarProperty Name="URLImagen" ColumnName="URLImagen" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ImagenUsuario">
+            <EntityTypeMapping TypeName="MyIphonesvModel.ImagenUsuario">
+              <MappingFragment StoreEntitySet="ImagenUsuario">
+                <ScalarProperty Name="ImagenID" ColumnName="ImagenID" />
+                <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
                 <ScalarProperty Name="URLImagen" ColumnName="URLImagen" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1238,6 +1301,7 @@ advertencia 6002: La tabla o vista 'MyIphonesv.dbo.Vista_Usuarios' no tiene defi
                 <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
                 <ScalarProperty Name="Precio" ColumnName="Precio" />
                 <ScalarProperty Name="Subtotal" ColumnName="Subtotal" />
+                <ScalarProperty Name="ImagenProducto" ColumnName="ImagenProducto" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1271,6 +1335,7 @@ advertencia 6002: La tabla o vista 'MyIphonesv.dbo.Vista_Usuarios' no tiene defi
                 <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="Rol" ColumnName="Rol" />
+                <ScalarProperty Name="Mensaje" ColumnName="Mensaje" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

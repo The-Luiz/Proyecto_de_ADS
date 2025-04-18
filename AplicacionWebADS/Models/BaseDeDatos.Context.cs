@@ -34,6 +34,7 @@ namespace AplicacionWebADS.Models
         public virtual DbSet<Facturacion> Facturacion { get; set; }
         public virtual DbSet<HistorialCambios> HistorialCambios { get; set; }
         public virtual DbSet<ImagenesProducto> ImagenesProducto { get; set; }
+        public virtual DbSet<ImagenUsuario> ImagenUsuario { get; set; }
         public virtual DbSet<Pedidos> Pedidos { get; set; }
         public virtual DbSet<Productos> Productos { get; set; }
         public virtual DbSet<Proveedores> Proveedores { get; set; }
@@ -44,7 +45,7 @@ namespace AplicacionWebADS.Models
         public virtual DbSet<Vista_Empleados> Vista_Empleados { get; set; }
         public virtual DbSet<Vista_Usuarios> Vista_Usuarios { get; set; }
     
-        public virtual ObjectResult<string> CrearUsuario(string nombre, string correo, string contraseña, string rol)
+        public virtual ObjectResult<string> CrearUsuario(string nombre, string correo, string contraseña)
         {
             var nombreParameter = nombre != null ?
                 new ObjectParameter("Nombre", nombre) :
@@ -58,11 +59,7 @@ namespace AplicacionWebADS.Models
                 new ObjectParameter("Contraseña", contraseña) :
                 new ObjectParameter("Contraseña", typeof(string));
     
-            var rolParameter = rol != null ?
-                new ObjectParameter("Rol", rol) :
-                new ObjectParameter("Rol", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("CrearUsuario", nombreParameter, correoParameter, contraseñaParameter, rolParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("CrearUsuario", nombreParameter, correoParameter, contraseñaParameter);
         }
     
         public virtual int GenerarRecibo(Nullable<int> clienteID, Nullable<int> pedidoID)

@@ -10,12 +10,14 @@
 namespace AplicacionWebADS.Models
 {
     using System;
+    using System.Collections.Generic;
     
-    public partial class LoginUsuario_Result
+    public partial class ImagenUsuario
     {
-        public Nullable<int> UsuarioID { get; set; }
-        public string Nombre { get; set; }
-        public string Rol { get; set; }
-        public string Mensaje { get; set; }
+        public int ImagenID { get; set; }
+        public int UsuarioID { get; set; }
+        public string URLImagen { get; set; }
+    
+        public virtual Usuarios Usuarios { get; set; }
     }
 }
