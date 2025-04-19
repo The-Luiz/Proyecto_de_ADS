@@ -14,6 +14,6 @@ namespace AplicacionWebADS.Models
     public partial class ReporteProductosMasVendido_Result
     {
         public string Nombre { get; set; }
-        public Nullable<int> totalVendido { get; set; }
+        public Nullable<int> TotalVendido { get; set; }
     }
 }

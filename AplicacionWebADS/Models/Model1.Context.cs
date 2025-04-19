@@ -15,10 +15,10 @@ namespace AplicacionWebADS.Models
     using System.Data.Entity.Core.Objects;
     using System.Linq;
     
-    public partial class MyIphonesvEntities : DbContext
+    public partial class MyIphone2Entities1 : DbContext
     {
-        public MyIphonesvEntities()
-            : base("name=MyIphonesvEntities")
+        public MyIphone2Entities1()
+            : base("name=MyIphone2Entities1")
         {
         }
     
@@ -62,7 +62,16 @@ namespace AplicacionWebADS.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("CrearUsuario", nombreParameter, correoParameter, contraseñaParameter);
         }
     
-        public virtual int GenerarRecibo(Nullable<int> clienteID, Nullable<int> pedidoID)
+        public virtual ObjectResult<string> EliminarUsuarioSeguro(Nullable<int> usuarioID)
+        {
+            var usuarioIDParameter = usuarioID.HasValue ?
+                new ObjectParameter("UsuarioID", usuarioID) :
+                new ObjectParameter("UsuarioID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("EliminarUsuarioSeguro", usuarioIDParameter);
+        }
+    
+        public virtual ObjectResult<string> GenerarRecibo(Nullable<int> clienteID, Nullable<int> pedidoID)
         {
             var clienteIDParameter = clienteID.HasValue ?
                 new ObjectParameter("ClienteID", clienteID) :
@@ -72,7 +81,7 @@ namespace AplicacionWebADS.Models
                 new ObjectParameter("PedidoID", pedidoID) :
                 new ObjectParameter("PedidoID", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("GenerarRecibo", clienteIDParameter, pedidoIDParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("GenerarRecibo", clienteIDParameter, pedidoIDParameter);
         }
     
         public virtual ObjectResult<LoginUsuario_Result> LoginUsuario(string correo, string contraseña)

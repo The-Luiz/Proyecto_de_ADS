@@ -1,33 +1,213 @@
-﻿@{
-    ViewBag.Title = "Home Page";
+﻿@model List<AplicacionWebADS.Models.Productos>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Mi_IphoneSV";
 }
 
-<main>
-    <section class="row" aria-labelledby="aspnetTitle">
-        <h1 id="title">ASP.NET</h1>
-        <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-        <p><a href="https://asp.net" class="btn btn-primary btn-md">Learn more &raquo;</a></p>
-    </section>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="~/Content/css/estilos.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
 
-    <div class="row">
-        <section class="col-md-4" aria-labelledby="gettingStartedTitle">
-            <h2 id="gettingStartedTitle">Getting started</h2>
-            <p>
-                ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-                enables a clean separation of concerns and gives you full control over markup
-                for enjoyable, agile development.
-            </p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-        </section>
-        <section class="col-md-4" aria-labelledby="librariesTitle">
-            <h2 id="librariesTitle">Get more libraries</h2>
-            <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-        </section>
-        <section class="col-md-4" aria-labelledby="hostingTitle">
-            <h2 id="hostingTitle">Web Hosting</h2>
-            <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-        </section>
+<body data-role="user">
+
+    <!-- Modal para Login y Registro -->
+    <div class="modal fade" id="authModal" tabindex="-1" aria-labelledby="authModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="authModalLabel">Iniciar Sesión o Registrarse</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Pestañas de Login y Registro -->
+                    <ul class="nav nav-tabs" id="authTabs" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="login-tab" data-bs-toggle="tab" data-bs-target="#login" type="button" role="tab" aria-controls="login" aria-selected="true">Iniciar Sesión</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="register-tab" data-bs-toggle="tab" data-bs-target="#register" type="button" role="tab" aria-controls="register" aria-selected="false">Registrarse</button>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="authTabsContent">
+                        <!-- Formulario de Login -->
+                        <div class="tab-pane fade show active" id="login" role="tabpanel" aria-labelledby="login-tab">
+                            @using (Html.BeginForm("Login", "Acceso", FormMethod.Post, new { @class = "formulario" }))
+                            {
+                                <!--form method="post" action=" Url.Action("Login", "Acceso")"-->
+                                @Html.AntiForgeryToken()
+                                <div class="mb-3">
+                                    <label for="correo" class="form-label">Correo Electrónico</label>
+                                    <input type="email" class="form-control" id="correo" name="correo" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="contraseña" class="form-label">Contraseña</label>
+                                    <input type="password" class="form-control" id="contraseña" name="contraseña" required>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
+                            }
+                        </div>
+                        <!-- Formulario de Registro -->
+                        <div class="tab-pane fade" id="register" role="tabpanel" aria-labelledby="register-tab">
+                            <!--form method="post" action="Url.Action("Registrar", "Acceso")"-->
+                            @using (Html.BeginForm("Registrar", "Acceso", FormMethod.Post, new { @class = "formulario" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                <div class="mb-3">
+                                    <label for="nombre" class="form-label">Nombre</label>
+                                    <input type="text" class="form-control" id="nombre" name="nombre" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="registroCorreo" class="form-label">Correo Electrónico</label>
+                                    <input type="email" class="form-control" id="registroCorreo" name="correo" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="registroContraseña" class="form-label">Contraseña</label>
+                                    <input type="password" class="form-control" id="registroContraseña" name="contraseña" required>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Registrarse</button>
+                                <!--form-->
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-</main>
+
+
+    <div id="overlay"></div>
+
+    <header>
+        <div class="menu-icon" onclick="toggleMenu()">☰</div>
+        <div class="logo">Mi_<span>IphoneSV</span></div>
+        <div class="header-icons">
+            <i class="fa-solid fa-magnifying-glass" onclick="toggleSearch()"></i>
+            <input type="text" id="searchBox" placeholder="Buscar Producto..." oninput="buscarProducto()">
+            <i class="fas fa-shopping-cart"></i>
+            <i class="fas fa-user" id="userIcon" data-bs-toggle="modal" data-bs-target="#authModal"></i>
+        </div>
+    </header>
+
+    <nav id="sideMenu">
+        @if (User.IsInRole("Admin"))
+        {
+            <ul>
+                <li><a href="#" onclick="showpage('dashboard')">Dashboard</a></li>
+                <li><a href="#" onclick="showpage('usuarios')">Usuarios</a></li>
+                <li><a href="#" onclick="showpage('categorias')">Categorías</a></li>
+                <li><a href="#" onclick="showpage('inventario')">Inventario</a></li>
+                <li><a href="#" onclick="showpage('pedidosadmin')">Pedidos</a></li>
+                <li><a href="@Url.Action("Logout", "Account")">Cerrar Sesión</a></li>
+            </ul>
+        }
+        else
+        {
+            <ul>
+                <li><a href="#" onclick="showpage('general')">General</a></li>
+                <li><a href="#" onclick="showpage('productos')">Productos</a></li>
+                <li><a href="#" onclick="showpage('pedidosuser')">Pedidos</a></li>
+                <li><a href="#" onclick="showpage('historial')">Historial de compras</a></li>
+                <li><a href="#" onclick="showpage('direccion')">Dirección de envío</a></li>
+                <li><a href="#" onclick="showpage('acerca')">Acerca de</a></li>
+                <li><a href="#" onclick="showpage('ajustes')">Ajustes de cuenta</a></li>
+            </ul>
+        }
+    </nav>
+
+    <main id="main-content">
+        <div id="general" class="page active">
+            <h1>Bienvenido a Mi_IphoneSV 📱</h1>
+            <p>Explora nuestros productos exclusivos Apple y lleva tu experiencia a otro nivel.</p>
+        </div>
+
+        <div id="productos" class="page">
+            <h1>Productos</h1>
+            <div class="sProductos">
+                @foreach (var producto in Model)
+                {
+                    <div class="Producto1">
+                        @if (producto.ImagenesProducto.Any())
+                        {
+                            <img src="@Url.Content(producto.ImagenesProducto.First().URLImagen)" alt="@producto.Nombre">
+                        }
+                        else
+                        {
+                            <img src="~/Content/images/placeholder.jpg" alt="Sin imagen">
+                        }
+                        <h3>@producto.Nombre</h3>
+                        <p>Precio: @producto.Precio.ToString("C")</p>
+                        <button onclick="agregarAlCarrito(@producto.ProductoID)">Comprar</button>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <!-- Otras secciones -->
+        <div id="pedidosuser" class="page">
+            <h1>Pedidos</h1>
+            <p>Aquí puedes ver tus pedidos realizados.</p>
+        </div>
+
+        <div id="historial" class="page">
+            <h1>Historial de Compras</h1>
+            <p>Aquí puedes ver tu historial de compras.</p>
+        </div>
+
+        <div id="direccion" class="page">
+            <h1>Dirección de Envío</h1>
+            <p>Aquí puedes ver y editar tu dirección de envío.</p>
+        </div>
+
+        <div id="acerca" class="page">
+            <h1>Acerca de</h1>
+            <p>Aquí puedes ver información sobre la tienda.</p>
+        </div>
+
+        <div id="ajustes" class="page">
+            <h1>Ajustes de Cuenta</h1>
+            <p>Aquí puedes ver y editar los ajustes de tu cuenta.</p>
+        </div>
+
+        @if (User.IsInRole("Admin"))
+        {
+            <div id="dashboard" class="page">
+                <h1>Dashboard del admin</h1>
+                <p>Aquí el admin puede ver el dashboard de la tienda.</p>
+            </div>
+
+            <div id="usuarios" class="page">
+                <h1>Usuarios de la tienda</h1>
+                <p>Aquí puedes ver los usuarios registrados.</p>
+            </div>
+
+            <div id="categorias" class="page">
+                <h1>Categorías de productos</h1>
+                <p>Aquí puedes gestionar las categorías.</p>
+            </div>
+
+            <div id="inventario" class="page">
+                <h1>Inventario de productos</h1>
+                <p>Aquí puedes gestionar el inventario de productos.</p>
+            </div>
+
+            <div id="pedidosadmin" class="page">
+                <h1>Pedidos realizados</h1>
+                <p>Aqui puedes ver los pedidos realizados.</p>
+            </div>
+        }
+    </main>
+
+    @section Scripts {
+        <script src="~/Scripts/js/script.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    }
+</body>
+</html>

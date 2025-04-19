@@ -12,14 +12,30 @@ namespace AplicacionWebADS.Controllers
 {
     public class ProductosController : Controller
     {
-        private MyIphonesvEntities db = new MyIphonesvEntities();
+        private MyIphone2Entities1 db = new MyIphone2Entities1();
 
         // GET: Productos
         public ActionResult Index()
         {
-            return View(db.Productos.ToList());
+            try
+            {
+                var productos = db.Productos.Include(p => p.ImagenesProducto).ToList();
+                return View(productos);
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = "Error al cargar productos: " + ex.Message;
+                return View(new List<Productos>());
+            }
         }
+      
 
+        [HttpPost]
+        public JsonResult AgregarAlCarrito(int productoId)
+        {
+            // Lógica para guardar en tabla CarritoCompras
+            return Json(new { success = true });
+        }
         // GET: Productos/Details/5
         public ActionResult Details(int? id)
         {

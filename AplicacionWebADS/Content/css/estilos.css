@@ -1,0 +1,255 @@
+﻿/* Estilos Generales */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow-x: hidden;
+}
+main {
+    width: 100%;
+    max-width: 1200px; /* Opcional: límite de ancho */
+    margin: 0 auto; /* Centrado horizontal */
+    padding: 20px;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    background: #000;
+    color: #fff;
+
+}
+
+p {
+    text-align: center;
+}
+/* La barrita del header, lo de arriba donde va la lupa, usuario, logo*/
+header {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    background: #151f28;
+    color: #01bd8c;
+    justify-content: space-between;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    box-sizing: border-box;
+}
+
+/* La hamburguesa */
+.menu-icon {
+    cursor: pointer;
+    font-size: 26px;
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: bold;
+    color: #01bd8c;
+}
+
+.header-icons {
+    display: flex;
+    gap: 20px;
+    font-size: 20px;
+}
+
+    .header-icons i {
+        color: #01bd8c;
+        cursor: pointer;
+    }
+
+/* LA IMAGEN DE LOS PRODUCTOS*/
+.sProductos img {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+    max-width: 100%;
+    width: 200px;
+    height: auto;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+/* El menu lateral */
+#sideMenu {
+    position: fixed;
+    top: 0;
+    left: -250px;
+    width: 250px;
+    height: 100%;
+    background: #151f28;
+    color: white;
+    padding-top: 60px;
+    transition: left 0.3s;
+    z-index: 1001;
+    overflow-y: auto;
+}
+
+
+    #sideMenu ul {
+        list-style: none;
+        padding: 0;
+    }
+
+        #sideMenu ul li {
+            padding: 15px;
+        }
+
+            #sideMenu ul li a {
+                color: white;
+                text-decoration: none;
+                font-size: 18px;
+                padding: 10px;
+                display: block;
+            }
+
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    display: none;
+    z-index: 1000;
+}
+
+.page {
+    display: none;
+    padding: 80px 20px 20px 20px;
+}
+
+    .page.active {
+        display: block;
+    }
+
+h1 {
+    font-size: 45px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.Producto1 {
+    border: 1px solid #ccc;
+    flex: 0 0 calc(25% - 20px); /* 4 items per row */
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+    background: #151f28;
+    max-width: 250px;
+    margin: 0;
+}
+
+.Precio {
+    color: #01bd8c;
+}
+
+button {
+    padding: 8px 16px;
+    background-color: #00f574;
+    border: none;
+    border-radius: 5px;
+    color: #000;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+    button:hover {
+        background-color: #00c965;
+    }
+
+#searchBox {
+    display: none;
+    padding: 5px 10px;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    margin-left: 10px;
+    transition: 0.3s;
+}
+
+#searchBox {
+    display: none; /* Oculto por defecto */
+}
+
+    #searchBox.visible {
+        display: block;
+    }
+
+/*modal login*/
+
+.modal {
+    display: none; /* Oculto por defecto */
+    position: fixed;
+    z-index: 1001;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.7);
+}
+
+.modal-content {
+    background-color: #151f28;
+    margin: 10% auto;
+    padding: 20px;
+    border: 1px solid #01bd8c;
+    width: 300px;
+    color: white;
+    border-radius: 10px;
+}
+
+.close-modal {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    cursor: pointer;
+}
+
+#login-form input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: none;
+}
+
+.error-message {
+    color: #c33d3d;
+    font-size: 14px;
+    text-align: center;
+    margin-top: 10px;
+}
+
+#registerForm {
+    display: none;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1001;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.7);
+}
+
+.form-label {
+    color : black;  
+}

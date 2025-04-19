@@ -12,7 +12,7 @@ namespace AplicacionWebADS.Controllers
 {
     public class UsuariosController : Controller
     {
-        private MyIphonesvEntities db = new MyIphonesvEntities();
+        private MyIphone2Entities1 db = new MyIphone2Entities1();
 
         // GET: Usuarios
         public ActionResult Index()
