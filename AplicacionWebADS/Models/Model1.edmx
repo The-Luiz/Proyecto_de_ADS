@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="MyIphonesvModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="MyIphone2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Bodega">
           <Key>
             <PropertyRef Name="TransaccionID" />
@@ -142,7 +142,7 @@
           <Property Name="Rol" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'MyIphonesv.dbo.Vista_Admin' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'MyIphone2.dbo.Vista_Admin' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="Vista_Admin">
           <Key>
             <PropertyRef Name="Producto_ID" />
@@ -170,7 +170,7 @@ advertencia 6002: La tabla o vista 'MyIphonesv.dbo.Vista_Admin' no tiene definid
           <Property Name="Pedido_Estado" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'MyIphonesv.dbo.Vista_CarritoCompras' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'MyIphone2.dbo.Vista_CarritoCompras' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="Vista_CarritoCompras">
           <Key>
             <PropertyRef Name="CarritoID" />
@@ -188,7 +188,7 @@ advertencia 6002: La tabla o vista 'MyIphonesv.dbo.Vista_CarritoCompras' no tien
           <Property Name="ImagenProducto" Type="nvarchar" MaxLength="255" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'MyIphonesv.dbo.Vista_Empleados' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'MyIphone2.dbo.Vista_Empleados' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="Vista_Empleados">
           <Key>
             <PropertyRef Name="ClienteID" />
@@ -202,7 +202,7 @@ advertencia 6002: La tabla o vista 'MyIphonesv.dbo.Vista_Empleados' no tiene def
           <Property Name="Direccion" Type="nvarchar" MaxLength="255" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'MyIphonesv.dbo.Vista_Usuarios' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'MyIphone2.dbo.Vista_Usuarios' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="Vista_Usuarios">
           <Key>
             <PropertyRef Name="Nombre" />
@@ -253,7 +253,9 @@ advertencia 6002: La tabla o vista 'MyIphonesv.dbo.Vista_Usuarios' no tiene defi
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__CarritoCo__Usuar__693CA210">
-          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="CarritoCompras" Type="Self.CarritoCompras" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Usuarios">
@@ -337,7 +339,9 @@ advertencia 6002: La tabla o vista 'MyIphonesv.dbo.Vista_Usuarios' no tiene defi
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Historial__Usuar__66603565">
-          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="HistorialCambios" Type="Self.HistorialCambios" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Usuarios">
@@ -361,7 +365,9 @@ advertencia 6002: La tabla o vista 'MyIphonesv.dbo.Vista_Usuarios' no tiene defi
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__ImagenUsu__Usuar__3E52440B">
-          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="ImagenUsuario" Type="Self.ImagenUsuario" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Usuarios">
@@ -425,6 +431,9 @@ advertencia 6002: La tabla o vista 'MyIphonesv.dbo.Vista_Usuarios' no tiene defi
           <Parameter Name="Correo" Type="varchar" Mode="In" />
           <Parameter Name="Contraseña" Type="nvarchar" Mode="In" />
         </Function>
+        <Function Name="EliminarUsuarioSeguro" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UsuarioID" Type="int" Mode="In" />
+        </Function>
         <Function Name="GenerarRecibo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ClienteID" Type="int" Mode="In" />
           <Parameter Name="PedidoID" Type="int" Mode="In" />
@@ -434,7 +443,7 @@ advertencia 6002: La tabla o vista 'MyIphonesv.dbo.Vista_Usuarios' no tiene defi
           <Parameter Name="Contraseña" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="ReporteProductosMasVendido" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-        <EntityContainer Name="MyIphonesvModelStoreContainer">
+        <EntityContainer Name="MyIphone2ModelStoreContainer">
           <EntitySet Name="Bodega" EntityType="Self.Bodega" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CarritoCompras" EntityType="Self.CarritoCompras" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Clientes" EntityType="Self.Clientes" Schema="dbo" store:Type="Tables" />
@@ -566,7 +575,7 @@ advertencia 6002: La tabla o vista 'MyIphonesv.dbo.Vista_Usuarios' no tiene defi
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="MyIphonesvModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="MyIphone2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Bodega">
           <Key>
             <PropertyRef Name="TransaccionID" />
@@ -841,7 +850,9 @@ advertencia 6002: La tabla o vista 'MyIphonesv.dbo.Vista_Usuarios' no tiene defi
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__CarritoCo__Usuar__693CA210">
-          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="CarritoCompras" Type="Self.CarritoCompras" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Usuarios">
@@ -949,7 +960,9 @@ advertencia 6002: La tabla o vista 'MyIphonesv.dbo.Vista_Usuarios' no tiene defi
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Historial__Usuar__66603565">
-          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="HistorialCambios" Type="Self.HistorialCambios" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Usuarios">
@@ -973,7 +986,9 @@ advertencia 6002: La tabla o vista 'MyIphonesv.dbo.Vista_Usuarios' no tiene defi
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__ImagenUsu__Usuar__3E52440B">
-          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="ImagenUsuario" Type="Self.ImagenUsuario" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Usuarios">
@@ -1008,7 +1023,7 @@ advertencia 6002: La tabla o vista 'MyIphonesv.dbo.Vista_Usuarios' no tiene defi
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="MyIphonesvEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="MyIphone2Entities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Bodega" EntityType="Self.Bodega" />
           <EntitySet Name="CarritoCompras" EntityType="Self.CarritoCompras" />
           <EntitySet Name="Clientes" EntityType="Self.Clientes" />
@@ -1099,34 +1114,37 @@ advertencia 6002: La tabla o vista 'MyIphonesv.dbo.Vista_Usuarios' no tiene defi
             <Parameter Name="Correo" Mode="In" Type="String" />
             <Parameter Name="Contraseña" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="GenerarRecibo">
+          <FunctionImport Name="EliminarUsuarioSeguro" ReturnType="Collection(String)">
+            <Parameter Name="UsuarioID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GenerarRecibo" ReturnType="Collection(String)">
             <Parameter Name="ClienteID" Mode="In" Type="Int32" />
             <Parameter Name="PedidoID" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="LoginUsuario" ReturnType="Collection(MyIphonesvModel.LoginUsuario_Result)">
+          <FunctionImport Name="LoginUsuario" ReturnType="Collection(MyIphone2Model.LoginUsuario_Result)">
             <Parameter Name="Correo" Mode="In" Type="String" />
             <Parameter Name="Contraseña" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="ReporteProductosMasVendido" ReturnType="Collection(MyIphonesvModel.ReporteProductosMasVendido_Result)" />
+          <FunctionImport Name="ReporteProductosMasVendido" ReturnType="Collection(MyIphone2Model.ReporteProductosMasVendido_Result)" />
         </EntityContainer>
         <ComplexType Name="LoginUsuario_Result">
           <Property Type="Int32" Name="UsuarioID" Nullable="true" />
           <Property Type="String" Name="Nombre" Nullable="true" MaxLength="100" />
           <Property Type="String" Name="Rol" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Mensaje" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="Mensaje" Nullable="false" MaxLength="13" />
         </ComplexType>
         <ComplexType Name="ReporteProductosMasVendido_Result">
           <Property Type="String" Name="Nombre" Nullable="false" MaxLength="100" />
-          <Property Type="Int32" Name="totalVendido" Nullable="true" />
+          <Property Type="Int32" Name="TotalVendido" Nullable="true" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="MyIphonesvModelStoreContainer" CdmEntityContainer="MyIphonesvEntities">
+        <EntityContainerMapping StorageEntityContainer="MyIphone2ModelStoreContainer" CdmEntityContainer="MyIphone2Entities1">
           <EntitySetMapping Name="Bodega">
-            <EntityTypeMapping TypeName="MyIphonesvModel.Bodega">
+            <EntityTypeMapping TypeName="MyIphone2Model.Bodega">
               <MappingFragment StoreEntitySet="Bodega">
                 <ScalarProperty Name="TransaccionID" ColumnName="TransaccionID" />
                 <ScalarProperty Name="ProductoID" ColumnName="ProductoID" />
@@ -1138,7 +1156,7 @@ advertencia 6002: La tabla o vista 'MyIphonesv.dbo.Vista_Usuarios' no tiene defi
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="CarritoCompras">
-            <EntityTypeMapping TypeName="MyIphonesvModel.CarritoCompras">
+            <EntityTypeMapping TypeName="MyIphone2Model.CarritoCompras">
               <MappingFragment StoreEntitySet="CarritoCompras">
                 <ScalarProperty Name="CarritoID" ColumnName="CarritoID" />
                 <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
@@ -1148,7 +1166,7 @@ advertencia 6002: La tabla o vista 'MyIphonesv.dbo.Vista_Usuarios' no tiene defi
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Clientes">
-            <EntityTypeMapping TypeName="MyIphonesvModel.Clientes">
+            <EntityTypeMapping TypeName="MyIphone2Model.Clientes">
               <MappingFragment StoreEntitySet="Clientes">
                 <ScalarProperty Name="ClienteID" ColumnName="ClienteID" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
@@ -1161,7 +1179,7 @@ advertencia 6002: La tabla o vista 'MyIphonesv.dbo.Vista_Usuarios' no tiene defi
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="DetallePedido">
-            <EntityTypeMapping TypeName="MyIphonesvModel.DetallePedido">
+            <EntityTypeMapping TypeName="MyIphone2Model.DetallePedido">
               <MappingFragment StoreEntitySet="DetallePedido">
                 <ScalarProperty Name="DetalleID" ColumnName="DetalleID" />
                 <ScalarProperty Name="PedidoID" ColumnName="PedidoID" />
@@ -1172,7 +1190,7 @@ advertencia 6002: La tabla o vista 'MyIphonesv.dbo.Vista_Usuarios' no tiene defi
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Facturacion">
-            <EntityTypeMapping TypeName="MyIphonesvModel.Facturacion">
+            <EntityTypeMapping TypeName="MyIphone2Model.Facturacion">
               <MappingFragment StoreEntitySet="Facturacion">
                 <ScalarProperty Name="FacturaID" ColumnName="FacturaID" />
                 <ScalarProperty Name="PedidoID" ColumnName="PedidoID" />
@@ -1184,7 +1202,7 @@ advertencia 6002: La tabla o vista 'MyIphonesv.dbo.Vista_Usuarios' no tiene defi
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="HistorialCambios">
-            <EntityTypeMapping TypeName="MyIphonesvModel.HistorialCambios">
+            <EntityTypeMapping TypeName="MyIphone2Model.HistorialCambios">
               <MappingFragment StoreEntitySet="HistorialCambios">
                 <ScalarProperty Name="CambioID" ColumnName="CambioID" />
                 <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
@@ -1195,7 +1213,7 @@ advertencia 6002: La tabla o vista 'MyIphonesv.dbo.Vista_Usuarios' no tiene defi
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ImagenesProducto">
-            <EntityTypeMapping TypeName="MyIphonesvModel.ImagenesProducto">
+            <EntityTypeMapping TypeName="MyIphone2Model.ImagenesProducto">
               <MappingFragment StoreEntitySet="ImagenesProducto">
                 <ScalarProperty Name="ImagenID" ColumnName="ImagenID" />
                 <ScalarProperty Name="ProductoID" ColumnName="ProductoID" />
@@ -1204,7 +1222,7 @@ advertencia 6002: La tabla o vista 'MyIphonesv.dbo.Vista_Usuarios' no tiene defi
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ImagenUsuario">
-            <EntityTypeMapping TypeName="MyIphonesvModel.ImagenUsuario">
+            <EntityTypeMapping TypeName="MyIphone2Model.ImagenUsuario">
               <MappingFragment StoreEntitySet="ImagenUsuario">
                 <ScalarProperty Name="ImagenID" ColumnName="ImagenID" />
                 <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
@@ -1213,7 +1231,7 @@ advertencia 6002: La tabla o vista 'MyIphonesv.dbo.Vista_Usuarios' no tiene defi
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Pedidos">
-            <EntityTypeMapping TypeName="MyIphonesvModel.Pedidos">
+            <EntityTypeMapping TypeName="MyIphone2Model.Pedidos">
               <MappingFragment StoreEntitySet="Pedidos">
                 <ScalarProperty Name="PedidoID" ColumnName="PedidoID" />
                 <ScalarProperty Name="ClienteID" ColumnName="ClienteID" />
@@ -1224,7 +1242,7 @@ advertencia 6002: La tabla o vista 'MyIphonesv.dbo.Vista_Usuarios' no tiene defi
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Productos">
-            <EntityTypeMapping TypeName="MyIphonesvModel.Productos">
+            <EntityTypeMapping TypeName="MyIphone2Model.Productos">
               <MappingFragment StoreEntitySet="Productos">
                 <ScalarProperty Name="ProductoID" ColumnName="ProductoID" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
@@ -1236,7 +1254,7 @@ advertencia 6002: La tabla o vista 'MyIphonesv.dbo.Vista_Usuarios' no tiene defi
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Proveedores">
-            <EntityTypeMapping TypeName="MyIphonesvModel.Proveedores">
+            <EntityTypeMapping TypeName="MyIphone2Model.Proveedores">
               <MappingFragment StoreEntitySet="Proveedores">
                 <ScalarProperty Name="ProveedorID" ColumnName="ProveedorID" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
@@ -1248,7 +1266,7 @@ advertencia 6002: La tabla o vista 'MyIphonesv.dbo.Vista_Usuarios' no tiene defi
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Recibos">
-            <EntityTypeMapping TypeName="MyIphonesvModel.Recibos">
+            <EntityTypeMapping TypeName="MyIphone2Model.Recibos">
               <MappingFragment StoreEntitySet="Recibos">
                 <ScalarProperty Name="ReciboID" ColumnName="ReciboID" />
                 <ScalarProperty Name="ClienteID" ColumnName="ClienteID" />
@@ -1264,7 +1282,7 @@ advertencia 6002: La tabla o vista 'MyIphonesv.dbo.Vista_Usuarios' no tiene defi
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Usuarios">
-            <EntityTypeMapping TypeName="MyIphonesvModel.Usuarios">
+            <EntityTypeMapping TypeName="MyIphone2Model.Usuarios">
               <MappingFragment StoreEntitySet="Usuarios">
                 <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
@@ -1275,7 +1293,7 @@ advertencia 6002: La tabla o vista 'MyIphonesv.dbo.Vista_Usuarios' no tiene defi
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Vista_Admin">
-            <EntityTypeMapping TypeName="MyIphonesvModel.Vista_Admin">
+            <EntityTypeMapping TypeName="MyIphone2Model.Vista_Admin">
               <MappingFragment StoreEntitySet="Vista_Admin">
                 <ScalarProperty Name="Producto_ID" ColumnName="Producto_ID" />
                 <ScalarProperty Name="Producto_Nombre" ColumnName="Producto_Nombre" />
@@ -1293,7 +1311,7 @@ advertencia 6002: La tabla o vista 'MyIphonesv.dbo.Vista_Usuarios' no tiene defi
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Vista_CarritoCompras">
-            <EntityTypeMapping TypeName="MyIphonesvModel.Vista_CarritoCompras">
+            <EntityTypeMapping TypeName="MyIphone2Model.Vista_CarritoCompras">
               <MappingFragment StoreEntitySet="Vista_CarritoCompras">
                 <ScalarProperty Name="CarritoID" ColumnName="CarritoID" />
                 <ScalarProperty Name="UsuarioNombre" ColumnName="UsuarioNombre" />
@@ -1306,7 +1324,7 @@ advertencia 6002: La tabla o vista 'MyIphonesv.dbo.Vista_Usuarios' no tiene defi
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Vista_Empleados">
-            <EntityTypeMapping TypeName="MyIphonesvModel.Vista_Empleados">
+            <EntityTypeMapping TypeName="MyIphone2Model.Vista_Empleados">
               <MappingFragment StoreEntitySet="Vista_Empleados">
                 <ScalarProperty Name="ClienteID" ColumnName="ClienteID" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
@@ -1317,7 +1335,7 @@ advertencia 6002: La tabla o vista 'MyIphonesv.dbo.Vista_Usuarios' no tiene defi
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Vista_Usuarios">
-            <EntityTypeMapping TypeName="MyIphonesvModel.Vista_Usuarios">
+            <EntityTypeMapping TypeName="MyIphone2Model.Vista_Usuarios">
               <MappingFragment StoreEntitySet="Vista_Usuarios">
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
@@ -1327,11 +1345,12 @@ advertencia 6002: La tabla o vista 'MyIphonesv.dbo.Vista_Usuarios' no tiene defi
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="CrearUsuario" FunctionName="MyIphonesvModel.Store.CrearUsuario" />
-          <FunctionImportMapping FunctionImportName="GenerarRecibo" FunctionName="MyIphonesvModel.Store.GenerarRecibo" />
-          <FunctionImportMapping FunctionImportName="LoginUsuario" FunctionName="MyIphonesvModel.Store.LoginUsuario">
+          <FunctionImportMapping FunctionImportName="CrearUsuario" FunctionName="MyIphone2Model.Store.CrearUsuario" />
+          <FunctionImportMapping FunctionImportName="EliminarUsuarioSeguro" FunctionName="MyIphone2Model.Store.EliminarUsuarioSeguro" />
+          <FunctionImportMapping FunctionImportName="GenerarRecibo" FunctionName="MyIphone2Model.Store.GenerarRecibo" />
+          <FunctionImportMapping FunctionImportName="LoginUsuario" FunctionName="MyIphone2Model.Store.LoginUsuario">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="MyIphonesvModel.LoginUsuario_Result">
+              <ComplexTypeMapping TypeName="MyIphone2Model.LoginUsuario_Result">
                 <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="Rol" ColumnName="Rol" />
@@ -1339,11 +1358,11 @@ advertencia 6002: La tabla o vista 'MyIphonesv.dbo.Vista_Usuarios' no tiene defi
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="ReporteProductosMasVendido" FunctionName="MyIphonesvModel.Store.ReporteProductosMasVendido">
+          <FunctionImportMapping FunctionImportName="ReporteProductosMasVendido" FunctionName="MyIphone2Model.Store.ReporteProductosMasVendido">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="MyIphonesvModel.ReporteProductosMasVendido_Result">
+              <ComplexTypeMapping TypeName="MyIphone2Model.ReporteProductosMasVendido_Result">
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="totalVendido" ColumnName="totalVendido" />
+                <ScalarProperty Name="TotalVendido" ColumnName="TotalVendido" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
